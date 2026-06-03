@@ -51,7 +51,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
 
 // ===== Scroll reveal =====
 const revealEls = document.querySelectorAll(
-  '.fact-card, .vcard, .step, .rcard, .benefit, .nutri-table-wrap, .callout, .section-head'
+  '.fact-card, .vcard, .step, .rcard, .benefit, .nutri-table-wrap, .callout, .section-head, .dcard'
 );
 revealEls.forEach(el => el.classList.add('reveal'));
 
@@ -66,6 +66,24 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 revealEls.forEach(el => io.observe(el));
+
+// ===== Disease filter tabs =====
+const tabs = document.querySelectorAll('.dtab');
+const dcards = document.querySelectorAll('.dcard');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter = tab.dataset.filter;
+    dcards.forEach(card => {
+      if (filter === 'all' || card.dataset.type === filter) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
 
 // ===== Active nav link highlight =====
 const sections = document.querySelectorAll('section[id]');

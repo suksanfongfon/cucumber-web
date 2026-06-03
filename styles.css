@@ -204,6 +204,63 @@ img { max-width: 100%; }
 .benefit h4 { font-size: 1rem; color: var(--green-900); margin-bottom: 4px; }
 .benefit p { font-size: .85rem; color: var(--muted); }
 
+/* ===== Diseases ===== */
+.disease-tabs {
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 36px;
+}
+.dtab {
+  padding: 9px 20px; border-radius: 999px; border: 1.5px solid var(--line);
+  background: #fff; font-family: 'Kanit'; font-size: .9rem; font-weight: 500;
+  color: var(--muted); cursor: pointer; transition: all .2s ease;
+}
+.dtab:hover { border-color: var(--green-400, #4ade80); color: var(--green-700); }
+.dtab.active { background: var(--green-600); color: #fff; border-color: var(--green-600); box-shadow: 0 6px 16px rgba(22,163,74,.3); }
+
+.disease-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+}
+.dcard {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow-sm);
+  transition: transform .22s ease, box-shadow .22s ease;
+  display: flex; flex-direction: column;
+}
+.dcard:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.dcard.hidden { display: none; }
+
+.dcard-img {
+  position: relative; height: 190px; overflow: hidden; background: var(--green-100);
+  display: flex; align-items: center; justify-content: center;
+}
+.dcard-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+.dcard:hover .dcard-img img { transform: scale(1.05); }
+.dcard-img.img-err::after {
+  content: '🌿'; font-size: 3rem;
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: var(--green-100);
+}
+.dcard-img.img-err img { display: none; }
+
+.dtype-badge {
+  position: absolute; top: 10px; right: 10px;
+  padding: 4px 12px; border-radius: 999px; font-size: .72rem; font-weight: 600;
+  font-family: 'Kanit'; letter-spacing: .3px; backdrop-filter: blur(6px);
+}
+.dtype-badge.fungal   { background: rgba(217,119,6,.9);  color: #fff; }
+.dtype-badge.bacterial{ background: rgba(37,99,235,.9);  color: #fff; }
+.dtype-badge.viral    { background: rgba(220,38,38,.9);  color: #fff; }
+.dtype-badge.oomycete { background: rgba(15,118,110,.9); color: #fff; }
+
+.dcard-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+.dcard-body h3 { font-size: 1.12rem; color: var(--green-900); margin-bottom: 4px; }
+.sci-name { font-size: .78rem; color: var(--muted); margin-bottom: 14px; }
+
+.dcard-detail { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.detail-block h4 { font-size: .85rem; font-family: 'Kanit'; font-weight: 600; color: var(--green-800, #166534); margin-bottom: 6px; }
+.detail-block.sym p { font-size: .86rem; color: #3d5041; line-height: 1.6; }
+.detail-block.prev ul { padding-left: 16px; }
+.detail-block.prev li { font-size: .83rem; color: var(--muted); margin-bottom: 4px; line-height: 1.55; }
+
 /* ===== Recipes ===== */
 .cards-grid.recipes { grid-template-columns: repeat(3, 1fr); }
 .rcard {
@@ -275,6 +332,7 @@ img { max-width: 100%; }
   .cards-grid.recipes { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr; }
   .hero h1 { font-size: 2.5rem; }
+  .disease-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 680px) {
   .nav-toggle { display: flex; }
@@ -285,7 +343,7 @@ img { max-width: 100%; }
   }
   .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
   .nav-links a { padding: 14px 22px; width: 100%; }
-  .cards-grid, .cards-grid.recipes, .fact-cards, .benefits { grid-template-columns: 1fr; }
+  .cards-grid, .cards-grid.recipes, .fact-cards, .benefits, .disease-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 2.1rem; }
   .hero-stats { gap: 22px; }
   .section { padding: 60px 0; }
