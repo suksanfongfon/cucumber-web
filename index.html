@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แตงร้าน — รู้จัก ปลูก กิน ครบทุกเรื่อง</title>
+  <meta name="description" content="เว็บไซต์ให้ความรู้เรื่องแตงร้านแบบครบวงจร: สายพันธุ์ วิธีปลูก การดูแล คุณค่าทางอาหาร เมนูแนะนำ และคำถามที่พบบ่อย" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥒</text></svg>" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="brand">
+        <span class="brand-icon">🥒</span>
+        <span class="brand-text">แตงร้าน<small>คลังความรู้</small></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">รู้จักแตงร้าน</a>
+        <a href="#varieties">สายพันธุ์</a>
+        <a href="#grow">วิธีปลูก</a>
+        <a href="#nutrition">คุณค่าอาหาร</a>
+        <a href="#recipes">เมนู</a>
+        <a href="#faq">คำถามพบบ่อย</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <span class="eyebrow">🌿 พืชผักสวนครัวคู่ครัวไทย</span>
+        <h1>แตงร้าน<br /><span class="hl">รู้จัก ปลูก กิน</span> ครบทุกเรื่อง</h1>
+        <p class="lead">
+          แตงร้านคือผักสวนครัวยอดนิยมที่ปลูกง่าย โตไว กินได้ทั้งสดและปรุงสุก
+          เว็บนี้รวบรวมทุกอย่างที่คุณควรรู้ ตั้งแต่สายพันธุ์ วิธีปลูก ไปจนถึงเมนูเด็ด
+        </p>
+        <div class="hero-actions">
+          <a href="#grow" class="btn btn-primary">เริ่มปลูกเลย</a>
+          <a href="#about" class="btn btn-ghost">ทำความรู้จักก่อน</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>30–45</strong><span>วันก็เก็บได้</span></div>
+          <div><strong>95%</strong><span>คือน้ำ</span></div>
+          <div><strong>16</strong><span>แคลอรี่/100ก.</span></div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="blob"></div>
+        <div class="cuke">🥒</div>
+        <div class="leaf leaf-1">🌿</div>
+        <div class="leaf leaf-2">🍃</div>
+        <div class="sun">☀️</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">รู้จักแตงร้าน</span>
+        <h2>แตงร้านคืออะไร?</h2>
+        <p>ผักตระกูลแตงที่คนไทยคุ้นเคยที่สุดชนิดหนึ่ง</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            <strong>แตงร้าน</strong> (ชื่อวิทยาศาสตร์ <em>Cucumis sativus</em>) เป็นพืชล้มลุก
+            ในวงศ์แตง (Cucurbitaceae) วงศ์เดียวกับแตงกวา ฟักทอง และน้ำเต้า
+            จุดเด่นคือผลที่ <strong>ยาวและใหญ่กว่าแตงกวา</strong> เปลือกบาง สีเขียวอ่อน
+            เนื้อกรอบ ฉ่ำน้ำ รสชาติอ่อนนุ่มไม่ขม
+          </p>
+          <p>
+            แตงร้านเป็นพืชเขตร้อนที่ปลูกได้ตลอดทั้งปีในเมืองไทย เจริญเติบโตเร็ว
+            ให้ผลผลิตดก จึงเป็นพืชเศรษฐกิจและพืชสวนครัวที่ได้รับความนิยมสูง
+            นิยมกินสดเป็นผักเคียง จิ้มน้ำพริก ทำส้มตำ หรือนำไปปรุงสุกในเมนูต่าง ๆ
+          </p>
+          <div class="callout">
+            <span class="callout-icon">💡</span>
+            <p><strong>แตงร้าน vs แตงกวา:</strong> เป็นพืชชนิดเดียวกัน แต่ "แตงร้าน" มักหมายถึงสายพันธุ์ที่ผลใหญ่ยาว เปลือกสีอ่อน ส่วน "แตงกวา" ผลเล็กสั้นกว่า เปลือกเขียวเข้ม</p>
+          </div>
+        </div>
+        <div class="fact-cards">
+          <div class="fact-card">
+            <span class="fc-icon">📏</span>
+            <h4>ขนาดผล</h4>
+            <p>ยาว 15–30 ซม. เส้นผ่านศูนย์กลาง 4–6 ซม.</p>
+          </div>
+          <div class="fact-card">
+            <span class="fc-icon">🌡️</span>
+            <h4>อุณหภูมิที่ชอบ</h4>
+            <p>25–32°C แดดเต็มวัน ดินระบายน้ำดี</p>
+          </div>
+          <div class="fact-card">
+            <span class="fc-icon">⏱️</span>
+            <h4>อายุเก็บเกี่ยว</h4>
+            <p>30–45 วันหลังหยอดเมล็ด</p>
+          </div>
+          <div class="fact-card">
+            <span class="fc-icon">💧</span>
+            <h4>ปริมาณน้ำในผล</h4>
+            <p>สูงถึง 95% ดับร้อนได้ดีเยี่ยม</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Varieties -->
+  <section class="section section-alt" id="varieties">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">สายพันธุ์</span>
+        <h2>สายพันธุ์แตงร้านยอดนิยม</h2>
+        <p>แต่ละพันธุ์มีจุดเด่นต่างกัน เลือกให้เหมาะกับการใช้งาน</p>
+      </div>
+      <div class="cards-grid">
+        <article class="vcard">
+          <div class="vcard-top">🥒</div>
+          <h3>แตงร้านพันธุ์พื้นเมือง</h3>
+          <p>ผลยาวสีเขียวอ่อน เนื้อกรอบ รสหวานอ่อน ทนทานต่อสภาพอากาศไทย ปลูกง่าย เหมาะกับมือใหม่</p>
+          <ul class="tags"><li>ปลูกง่าย</li><li>ทนโรค</li></ul>
+        </article>
+        <article class="vcard">
+          <div class="vcard-top">🌱</div>
+          <h3>แตงร้านลูกผสม (F1)</h3>
+          <p>พัฒนาสายพันธุ์ให้ผลดก สม่ำเสมอ ขนาดสวย ต้านทานโรคได้ดี เป็นที่นิยมในเชิงการค้า</p>
+          <ul class="tags"><li>ผลดก</li><li>เชิงการค้า</li></ul>
+        </article>
+        <article class="vcard">
+          <div class="vcard-top">✨</div>
+          <h3>แตงร้านผิวมัน</h3>
+          <p>เปลือกบางเรียบเป็นมัน สีเขียวสด ไม่มีหนาม เนื้อแน่น เหมาะทำสลัดและกินสด</p>
+          <ul class="tags"><li>กินสด</li><li>เปลือกบาง</li></ul>
+        </article>
+        <article class="vcard">
+          <div class="vcard-top">🥗</div>
+          <h3>แตงร้านญี่ปุ่น</h3>
+          <p>ผลเรียวยาว สีเขียวเข้ม รสหวานกรอบ เมล็ดน้อย นิยมในเมนูสุขภาพและซูชิ</p>
+          <ul class="tags"><li>เมล็ดน้อย</li><li>หวานกรอบ</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grow / Steps -->
+  <section class="section" id="grow">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">วิธีปลูก</span>
+        <h2>ปลูกแตงร้าน 6 ขั้นตอน</h2>
+        <p>ทำตามทีละขั้น ปลูกได้แม้พื้นที่จำกัด</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-no">1</div>
+          <div class="step-body">
+            <h3>เตรียมดิน 🪴</h3>
+            <p>ใช้ดินร่วนระบายน้ำดี ผสมปุ๋ยคอกหรือปุ๋ยหมัก ค่า pH 5.5–6.8 พรวนดินให้ร่วนซุยและตากแดดฆ่าเชื้อ 5–7 วัน</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">2</div>
+          <div class="step-body">
+            <h3>เพาะเมล็ด 🌰</h3>
+            <p>แช่เมล็ดในน้ำอุ่น 4–6 ชั่วโมง แล้วหยอดลงหลุมลึก 1–2 ซม. หลุมละ 2–3 เมล็ด ระยะห่าง 50–70 ซม.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">3</div>
+          <div class="step-body">
+            <h3>รดน้ำสม่ำเสมอ 💧</h3>
+            <p>รดน้ำเช้า–เย็น ให้ดินชุ่มแต่ไม่แฉะ ช่วงออกดอกติดผลต้องการน้ำมากเป็นพิเศษ ระวังอย่าให้ขาดน้ำ</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">4</div>
+          <div class="step-body">
+            <h3>ทำค้างให้เลื้อย 🪜</h3>
+            <p>เมื่อต้นสูง 20–30 ซม. ทำค้างไม้ไผ่หรือตาข่ายให้เถาเลื้อยขึ้น ช่วยให้ผลตรงสวย ลดโรค และเก็บง่าย</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">5</div>
+          <div class="step-body">
+            <h3>ใส่ปุ๋ย–ดูแลโรค 🐛</h3>
+            <p>ใส่ปุ๋ยทุก 10–14 วัน หมั่นตรวจเพลี้ยและราน้ำค้าง ใช้น้ำหมักชีวภาพหรือสารชีวภัณฑ์ป้องกัน</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">6</div>
+          <div class="step-body">
+            <h3>เก็บเกี่ยว 🧺</h3>
+            <p>เก็บได้เมื่ออายุ 30–45 วัน เลือกผลขนาดพอดี ผิวเขียวสด เก็บทุก 2–3 วันเพื่อกระตุ้นให้ติดผลต่อเนื่อง</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nutrition -->
+  <section class="section section-alt" id="nutrition">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">คุณค่าทางอาหาร</span>
+        <h2>กินแตงร้านดีต่อสุขภาพอย่างไร</h2>
+        <p>แคลอรี่ต่ำ น้ำเยอะ วิตามินแน่น</p>
+      </div>
+      <div class="nutri-grid">
+        <div class="nutri-table-wrap">
+          <h3>คุณค่าโภชนาการ (ต่อ 100 กรัม)</h3>
+          <table class="nutri-table">
+            <tbody>
+              <tr><td>พลังงาน</td><td>16 กิโลแคลอรี่</td></tr>
+              <tr><td>น้ำ</td><td>95 กรัม</td></tr>
+              <tr><td>คาร์โบไฮเดรต</td><td>3.6 กรัม</td></tr>
+              <tr><td>ใยอาหาร</td><td>0.5 กรัม</td></tr>
+              <tr><td>โปรตีน</td><td>0.7 กรัม</td></tr>
+              <tr><td>วิตามินซี</td><td>2.8 มิลลิกรัม</td></tr>
+              <tr><td>วิตามินเค</td><td>16.4 ไมโครกรัม</td></tr>
+              <tr><td>โพแทสเซียม</td><td>147 มิลลิกรัม</td></tr>
+            </tbody>
+          </table>
+          <p class="muted">* ค่าโดยประมาณ อ้างอิงข้อมูลโภชนาการแตงกวา/แตงร้านทั่วไป</p>
+        </div>
+        <div class="benefits">
+          <div class="benefit"><span>💦</span><div><h4>เติมความชุ่มชื้น</h4><p>น้ำสูงถึง 95% ช่วยดับร้อน เติมน้ำให้ร่างกาย</p></div></div>
+          <div class="benefit"><span>⚖️</span><div><h4>ควบคุมน้ำหนัก</h4><p>แคลอรี่ต่ำ อิ่มท้อง เหมาะกับคนลดน้ำหนัก</p></div></div>
+          <div class="benefit"><span>🌿</span><div><h4>สารต้านอนุมูลอิสระ</h4><p>มีฟลาโวนอยด์และวิตามินซีช่วยชะลอความเสื่อม</p></div></div>
+          <div class="benefit"><span>💚</span><div><h4>บำรุงผิว</h4><p>วิตามินและน้ำช่วยให้ผิวสดชื่น นิยมใช้พอกหน้า</p></div></div>
+          <div class="benefit"><span>🩺</span><div><h4>ช่วยระบบขับถ่าย</h4><p>ใยอาหารและน้ำช่วยให้ลำไส้ทำงานดี</p></div></div>
+          <div class="benefit"><span>🫀</span><div><h4>ดีต่อหัวใจ</h4><p>โพแทสเซียมช่วยควบคุมความดันโลหิต</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recipes -->
+  <section class="section" id="recipes">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">เมนูแนะนำ</span>
+        <h2>เมนูเด็ดจากแตงร้าน</h2>
+        <p>ทั้งกินสดและปรุงสุก ทำง่ายที่บ้าน</p>
+      </div>
+      <div class="cards-grid recipes">
+        <article class="rcard">
+          <div class="rcard-emoji">🥗</div>
+          <h3>ยำแตงร้านกุ้งสด</h3>
+          <p>แตงร้านหั่นบาง คลุกน้ำยำรสจัด ใส่กุ้งลวก หอมแดง สดชื่นเปรี้ยวเผ็ดกำลังดี</p>
+          <span class="rtag">เมนูจานเดียว · 15 นาที</span>
+        </article>
+        <article class="rcard">
+          <div class="rcard-emoji">🍲</div>
+          <h3>แกงจืดแตงร้านยัดไส้</h3>
+          <p>แตงร้านหั่นท่อนยัดไส้หมูสับ ต้มน้ำซุปใส กลมกล่อม อ่อนโยน เหมาะทุกวัย</p>
+          <span class="rtag">เมนูน้ำ · 30 นาที</span>
+        </article>
+        <article class="rcard">
+          <div class="rcard-emoji">🌶️</div>
+          <h3>แตงร้านผัดไข่</h3>
+          <p>ผัดแตงร้านกับไข่และกระเทียม รสชาติเรียบง่าย กรอบหวานจากแตง ทำเร็วทันใจ</p>
+          <span class="rtag">เมนูผัด · 10 นาที</span>
+        </article>
+        <article class="rcard">
+          <div class="rcard-emoji">🥒</div>
+          <h3>แตงร้านจิ้มน้ำพริก</h3>
+          <p>หั่นเป็นแว่นกินสดคู่น้ำพริกกะปิหรือน้ำพริกอ่อง กรอบฉ่ำ เป็นผักเคียงคลาสสิก</p>
+          <span class="rtag">ผักเคียง · 5 นาที</span>
+        </article>
+        <article class="rcard">
+          <div class="rcard-emoji">🧊</div>
+          <h3>น้ำแตงร้านปั่นเย็น</h3>
+          <p>ปั่นแตงร้านกับน้ำมะนาวและน้ำผึ้ง เติมน้ำแข็ง สดชื่นดับร้อน ดีต่อสุขภาพ</p>
+          <span class="rtag">เครื่องดื่ม · 5 นาที</span>
+        </article>
+        <article class="rcard">
+          <div class="rcard-emoji">🥬</div>
+          <h3>แตงร้านดอง</h3>
+          <p>ดองแตงร้านกับน้ำส้มสายชู น้ำตาล เกลือ เก็บไว้กินได้นาน เปรี้ยวหวานกรุบกรอบ</p>
+          <span class="rtag">ของแกล้ม · ดอง 1 วัน</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-alt" id="faq">
+    <div class="container narrow">
+      <div class="section-head">
+        <span class="kicker">คำถามที่พบบ่อย</span>
+        <h2>ไขข้อสงสัยเรื่องแตงร้าน</h2>
+      </div>
+      <div class="faq-list" id="faqList">
+        <div class="faq-item">
+          <button class="faq-q">แตงร้านกับแตงกวาต่างกันอย่างไร? <span class="faq-ico">+</span></button>
+          <div class="faq-a"><p>เป็นพืชชนิดเดียวกัน (Cucumis sativus) ต่างกันที่สายพันธุ์ แตงร้านผลใหญ่ยาว เปลือกสีเขียวอ่อน ส่วนแตงกวาผลเล็กสั้นกว่า เปลือกเขียวเข้ม รสชาติใกล้เคียงกัน</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">ปลูกแตงร้านในกระถางได้ไหม? <span class="faq-ico">+</span></button>
+          <div class="faq-a"><p>ได้ครับ ใช้กระถางขนาดอย่างน้อย 12 นิ้วขึ้นไป ดินระบายน้ำดี วางในที่แดดเต็มวัน และทำค้างให้เถาเลื้อย เหมาะกับการปลูกในบ้านพื้นที่จำกัด</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">แตงร้านปลูกกี่วันถึงเก็บได้? <span class="faq-ico">+</span></button>
+          <div class="faq-a"><p>โดยทั่วไปเก็บเกี่ยวได้เมื่ออายุ 30–45 วันหลังหยอดเมล็ด เก็บทุก 2–3 วันจะช่วยกระตุ้นให้ต้นติดผลต่อเนื่องนานขึ้น</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">ทำไมแตงร้านมีรสขม? <span class="faq-ico">+</span></button>
+          <div class="faq-a"><p>ความขมเกิดจากสาร "คิวเคอร์บิทาซิน" ซึ่งเพิ่มขึ้นเมื่อต้นเครียดจากการขาดน้ำ อากาศร้อนจัด หรือดินไม่สมบูรณ์ การรดน้ำสม่ำเสมอช่วยลดความขมได้</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">เก็บแตงร้านให้สดได้นานแค่ไหน? <span class="faq-ico">+</span></button>
+          <div class="faq-a"><p>เก็บในตู้เย็นช่องผักได้ 5–7 วัน ห่อด้วยกระดาษหรือใส่ถุงเจาะรูเพื่อไม่ให้ชื้นเกินไป ควรล้างก่อนกินไม่ใช่ก่อนเก็บ</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">คนเป็นเบาหวานกินแตงร้านได้ไหม? <span class="faq-ico">+</span></button>
+          <div class="faq-a"><p>กินได้ครับ แตงร้านมีน้ำตาลและแคลอรี่ต่ำ ค่าดัชนีน้ำตาลต่ำ จึงเป็นผักที่เหมาะกับผู้ควบคุมระดับน้ำตาล แต่ควรกินหลากหลายและปรึกษาแพทย์ตามภาวะของแต่ละคน</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container cta-inner">
+      <h2>พร้อมเริ่มปลูกแตงร้านแล้วหรือยัง? 🌱</h2>
+      <p>เริ่มจากเมล็ดไม่กี่เมล็ด อีก 30 วันคุณก็มีแตงร้านสด ๆ จากสวนหลังบ้าน</p>
+      <a href="#grow" class="btn btn-primary">ดูวิธีปลูกอีกครั้ง</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand">
+        <span class="brand-icon">🥒</span>
+        <div>
+          <strong>แตงร้าน — คลังความรู้</strong>
+          <p>เว็บไซต์ให้ความรู้เรื่องแตงร้านแบบครบวงจร</p>
+        </div>
+      </div>
+      <nav class="foot-links">
+        <a href="#about">รู้จักแตงร้าน</a>
+        <a href="#varieties">สายพันธุ์</a>
+        <a href="#grow">วิธีปลูก</a>
+        <a href="#nutrition">คุณค่าอาหาร</a>
+        <a href="#recipes">เมนู</a>
+        <a href="#faq">คำถามพบบ่อย</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 แตงร้าน คลังความรู้ · สร้างเพื่อการศึกษา · ข้อมูลโภชนาการเป็นค่าโดยประมาณ</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="กลับขึ้นบน">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
