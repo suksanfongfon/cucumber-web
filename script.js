@@ -171,14 +171,13 @@ tabs.forEach(tab => {
 
 // ===== Thailand Map =====
 (function initThaiMap() {
-  if (!document.getElementById('thaiMap') || typeof L === 'undefined') return;
+  const mapEl  = document.getElementById('thaiMap');
+  const listEl = document.getElementById('marketList');
+  if (!mapEl || !listEl) return;
 
-  const map = L.map('thaiMap', { center: [13.0, 101.5], zoom: 6, maxZoom: 11, minZoom: 5 });
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>',
-    opacity: 0.65
-  }).addTo(map);
+  /* shared state — set after Leaflet init */
+  let mapRef    = null;
+  const markerMap = {};
 
   /* --- Province data (77 จังหวัด) --- */
   const PD = {
@@ -287,116 +286,25 @@ tabs.forEach(tab => {
     "ตะวันออกเฉียงเหนือ":"#f59e0b","ตะวันตก":"#ec4899","ใต้":"#ef4444"
   };
 
-  let geojsonLayer = null;
-
-  fetch('https://raw.githubusercontent.com/apisit/thailand.json/master/thailand.json')
-    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-    .then(data => {
-      geojsonLayer = L.geoJSON(data, {
-        style: f => {
-          const p = getPD(f.properties.Province);
-          return {
-            color: '#fff', weight: 0.8,
-            fillColor: p ? regionColor[p.region] || '#22c55e' : '#22c55e',
-            fillOpacity: 0.38
-          };
-        },
-        onEachFeature: (f, layer) => {
-          const p = getPD(f.properties.Province);
-          if (!p) return;
-          layer.bindTooltip(`
-            <div style="font-family:'Kanit',sans-serif;min-width:190px;line-height:1.6">
-              <strong style="font-size:14px;color:#14532d">${p.th}</strong>
-              <div style="font-size:11px;color:#6b7280">${f.properties.Province}</div>
-              <hr style="border:0;border-top:1px solid #e5e7eb;margin:6px 0">
-              <span style="font-size:12px">
-                📐 พื้นที่ <b>${p.area.toLocaleString()}</b> ตร.กม.<br>
-                👥 ประชากร <b>${p.pop.toLocaleString()}</b> คน<br>
-                🗺️ ภาค<b>${p.region}</b>
-              </span>
-            </div>`, { sticky: true, opacity: 1 });
-          layer.on({
-            mouseover: e => { e.target.setStyle({ fillOpacity: 0.75, weight: 2, color: '#14532d' }); e.target.bringToFront(); },
-            mouseout:  e => { geojsonLayer.resetStyle(e.target); }
-          });
-        }
-      }).addTo(map);
-    })
-    .catch(() => {
-      document.getElementById('thaiMap').insertAdjacentHTML('beforeend',
-        '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(240,253,244,.9);z-index:400;font-family:Kanit;color:#374151;text-align:center;border-radius:18px"><div>🌏 ข้อมูลขอบเขตจังหวัดโหลดไม่สำเร็จ<br><small style="color:#6b7280">ตลาดยังคงแสดงบนแผนที่</small></div></div>'
-      );
-    });
-
   /* --- Market data --- */
   const MARKETS = [
-    { id:1, name:"ตลาดไท", region:"กลาง", lat:14.064, lon:100.684, province:"ปทุมธานี",
-      type:"ค้าส่งผักผลไม้", area:"380 ไร่", time:"24 ชั่วโมง",
-      detail:"ตลาดค้าส่งสินค้าเกษตรที่ใหญ่ที่สุดในเอเชียตะวันออกเฉียงใต้ รองรับสินค้ากว่า 10,000 ตัน/วัน ผู้ค้ากว่า 3,000 ราย" },
-    { id:2, name:"ตลาดสี่มุมเมือง", region:"กลาง", lat:13.856, lon:100.530, province:"นนทบุรี",
-      type:"ค้าส่งผักผลไม้", area:"200 ไร่", time:"02:00–08:00 น.",
-      detail:"ตลาดค้าส่งขนาดใหญ่ฝั่งตะวันตกของกรุงเทพ รองรับพ่อค้าแม่ค้ารายย่อยทั่วปริมณฑล" },
-    { id:3, name:"ตลาดสินค้าเกษตรเชียงใหม่", region:"เหนือ", lat:18.788, lon:98.986, province:"เชียงใหม่",
-      type:"ค้าส่งผักผลไม้", area:"120 ไร่", time:"01:00–07:00 น.",
-      detail:"ศูนย์กระจายสินค้าเกษตรภาคเหนือ รวบรวมผักจากเชียงใหม่ เชียงราย ลำปาง และแม่ฮ่องสอน" },
-    { id:4, name:"ตลาดสินค้าเกษตรเชียงราย", region:"เหนือ", lat:19.907, lon:99.833, province:"เชียงราย",
-      type:"ค้าส่งผักผลไม้", area:"60 ไร่", time:"02:00–08:00 น.",
-      detail:"ตลาดกลางภาคเหนือตอนบน รับสินค้าเกษตรจากเชียงราย พะเยา น่าน และชายแดน" },
-    { id:5, name:"ตลาดสินค้าเกษตรพิษณุโลก", region:"เหนือ", lat:16.825, lon:100.264, province:"พิษณุโลก",
-      type:"ค้าส่งผักผลไม้", area:"55 ไร่", time:"02:00–08:00 น.",
-      detail:"ตลาดกลางภาคเหนือตอนล่าง รองรับสินค้าจากพิษณุโลก เพชรบูรณ์ พิจิตร สุโขทัย" },
-    { id:6, name:"ตลาดกลาง นครราชสีมา", region:"ตะวันออกเฉียงเหนือ", lat:14.979, lon:102.098, province:"นครราชสีมา",
-      type:"ค้าส่งผักผลไม้", area:"100 ไร่", time:"22:00–06:00 น.",
-      detail:"ศูนย์กระจายสินค้าเกษตรอีสานใต้ รองรับผักจากโคราช บุรีรัมย์ สุรินทร์ และชัยภูมิ" },
-    { id:7, name:"ตลาดกลาง ขอนแก่น", region:"ตะวันออกเฉียงเหนือ", lat:16.432, lon:102.834, province:"ขอนแก่น",
-      type:"ค้าส่งผักผลไม้", area:"90 ไร่", time:"01:00–07:00 น.",
-      detail:"ตลาดกลางอีสานกลาง ครอบคลุมขอนแก่น มหาสารคาม กาฬสินธุ์ และร้อยเอ็ด" },
-    { id:8, name:"ตลาดกลาง อุดรธานี", region:"ตะวันออกเฉียงเหนือ", lat:17.417, lon:102.788, province:"อุดรธานี",
-      type:"ค้าส่งผักผลไม้", area:"80 ไร่", time:"02:00–08:00 น.",
-      detail:"ศูนย์กระจายสินค้าเกษตรอีสานเหนือ ครอบคลุมอุดร หนองคาย เลย หนองบัวลำภู" },
-    { id:9, name:"ตลาดสินค้าเกษตร นครปฐม", region:"ตะวันตก", lat:13.819, lon:100.047, province:"นครปฐม",
-      type:"ค้าส่งผักผลไม้", area:"70 ไร่", time:"02:00–07:00 น.",
-      detail:"ตลาดกลางฝั่งตะวันตก รับสินค้าจากนครปฐม ราชบุรี สุพรรณบุรี และกาญจนบุรี" },
-    { id:10, name:"ตลาดกลาง ชลบุรี", region:"ตะวันออก", lat:13.366, lon:100.987, province:"ชลบุรี",
-      type:"ค้าส่ง-ปลีก", area:"50 ไร่", time:"04:00–10:00 น.",
-      detail:"ตลาดผักผลไม้ภาคตะวันออก รองรับพื้นที่ชลบุรี ระยอง จันทบุรี และตราด" },
-    { id:11, name:"ตลาดกลาง สุราษฎร์ธานี", region:"ใต้", lat:9.138, lon:99.327, province:"สุราษฎร์ธานี",
-      type:"ค้าส่งผักผลไม้", area:"60 ไร่", time:"02:00–08:00 น.",
-      detail:"ศูนย์กระจายสินค้าเกษตรภาคใต้ตอนบน ครอบคลุมสุราษฎร์ ชุมพร และนครศรีธรรมราช" },
-    { id:12, name:"ตลาดกลาง หาดใหญ่", region:"ใต้", lat:7.007, lon:100.477, province:"สงขลา",
-      type:"ค้าส่งผักผลไม้", area:"80 ไร่", time:"01:00–07:00 น.",
-      detail:"ตลาดผักผลไม้ใหญ่ที่สุดในภาคใต้ตอนล่าง รองรับสงขลา ปัตตานี ยะลา นราธิวาส" }
+    { id:1,  name:"ตลาดไท",                    region:"กลาง",                   lat:14.064, lon:100.684, province:"ปทุมธานี",      type:"ค้าส่งผักผลไม้", area:"380 ไร่",  time:"24 ชั่วโมง",      detail:"ตลาดค้าส่งสินค้าเกษตรที่ใหญ่ที่สุดในเอเชียตะวันออกเฉียงใต้ รองรับสินค้ากว่า 10,000 ตัน/วัน ผู้ค้ากว่า 3,000 ราย" },
+    { id:2,  name:"ตลาดสี่มุมเมือง",            region:"กลาง",                   lat:13.856, lon:100.530, province:"นนทบุรี",       type:"ค้าส่งผักผลไม้", area:"200 ไร่",  time:"02:00–08:00 น.",  detail:"ตลาดค้าส่งขนาดใหญ่ฝั่งตะวันตกของกรุงเทพ รองรับพ่อค้าแม่ค้ารายย่อยทั่วปริมณฑล" },
+    { id:3,  name:"ตลาดสินค้าเกษตรเชียงใหม่",  region:"เหนือ",                  lat:18.788, lon:98.986,  province:"เชียงใหม่",    type:"ค้าส่งผักผลไม้", area:"120 ไร่",  time:"01:00–07:00 น.",  detail:"ศูนย์กระจายสินค้าเกษตรภาคเหนือ รวบรวมผักจากเชียงใหม่ เชียงราย ลำปาง และแม่ฮ่องสอน" },
+    { id:4,  name:"ตลาดสินค้าเกษตรเชียงราย",   region:"เหนือ",                  lat:19.907, lon:99.833,  province:"เชียงราย",     type:"ค้าส่งผักผลไม้", area:"60 ไร่",   time:"02:00–08:00 น.",  detail:"ตลาดกลางภาคเหนือตอนบน รับสินค้าเกษตรจากเชียงราย พะเยา น่าน และชายแดน" },
+    { id:5,  name:"ตลาดสินค้าเกษตรพิษณุโลก",   region:"เหนือ",                  lat:16.825, lon:100.264, province:"พิษณุโลก",     type:"ค้าส่งผักผลไม้", area:"55 ไร่",   time:"02:00–08:00 น.",  detail:"ตลาดกลางภาคเหนือตอนล่าง รองรับสินค้าจากพิษณุโลก เพชรบูรณ์ พิจิตร สุโขทัย" },
+    { id:6,  name:"ตลาดกลาง นครราชสีมา",        region:"ตะวันออกเฉียงเหนือ",    lat:14.979, lon:102.098, province:"นครราชสีมา",   type:"ค้าส่งผักผลไม้", area:"100 ไร่",  time:"22:00–06:00 น.",  detail:"ศูนย์กระจายสินค้าเกษตรอีสานใต้ รองรับผักจากโคราช บุรีรัมย์ สุรินทร์ และชัยภูมิ" },
+    { id:7,  name:"ตลาดกลาง ขอนแก่น",           region:"ตะวันออกเฉียงเหนือ",    lat:16.432, lon:102.834, province:"ขอนแก่น",      type:"ค้าส่งผักผลไม้", area:"90 ไร่",   time:"01:00–07:00 น.",  detail:"ตลาดกลางอีสานกลาง ครอบคลุมขอนแก่น มหาสารคาม กาฬสินธุ์ และร้อยเอ็ด" },
+    { id:8,  name:"ตลาดกลาง อุดรธานี",          region:"ตะวันออกเฉียงเหนือ",    lat:17.417, lon:102.788, province:"อุดรธานี",      type:"ค้าส่งผักผลไม้", area:"80 ไร่",   time:"02:00–08:00 น.",  detail:"ศูนย์กระจายสินค้าเกษตรอีสานเหนือ ครอบคลุมอุดร หนองคาย เลย หนองบัวลำภู" },
+    { id:9,  name:"ตลาดสินค้าเกษตร นครปฐม",     region:"ตะวันตก",               lat:13.819, lon:100.047, province:"นครปฐม",       type:"ค้าส่งผักผลไม้", area:"70 ไร่",   time:"02:00–07:00 น.",  detail:"ตลาดกลางฝั่งตะวันตก รับสินค้าจากนครปฐม ราชบุรี สุพรรณบุรี และกาญจนบุรี" },
+    { id:10, name:"ตลาดกลาง ชลบุรี",            region:"ตะวันออก",              lat:13.366, lon:100.987, province:"ชลบุรี",        type:"ค้าส่ง-ปลีก",    area:"50 ไร่",   time:"04:00–10:00 น.",  detail:"ตลาดผักผลไม้ภาคตะวันออก รองรับพื้นที่ชลบุรี ระยอง จันทบุรี และตราด" },
+    { id:11, name:"ตลาดกลาง สุราษฎร์ธานี",      region:"ใต้",                   lat:9.138,  lon:99.327,  province:"สุราษฎร์ธานี", type:"ค้าส่งผักผลไม้", area:"60 ไร่",   time:"02:00–08:00 น.",  detail:"ศูนย์กระจายสินค้าเกษตรภาคใต้ตอนบน ครอบคลุมสุราษฎร์ ชุมพร และนครศรีธรรมราช" },
+    { id:12, name:"ตลาดกลาง หาดใหญ่",           region:"ใต้",                   lat:7.007,  lon:100.477, province:"สงขลา",        type:"ค้าส่งผักผลไม้", area:"80 ไร่",   time:"01:00–07:00 น.",  detail:"ตลาดผักผลไม้ใหญ่ที่สุดในภาคใต้ตอนล่าง รองรับสงขลา ปัตตานี ยะลา นราธิวาส" }
   ];
-
   const regionEmoji = { "เหนือ":"🏔️","กลาง":"🌾","ตะวันออก":"🌊","ตะวันออกเฉียงเหนือ":"🌻","ตะวันตก":"🌲","ใต้":"🌴" };
 
-  /* build market list */
-  const listEl = document.getElementById('marketList');
-  const markers = {};
-
+  // ── STEP 1: Sidebar cards (ไม่ขึ้นกับ Leaflet) ──
   MARKETS.forEach(m => {
-    /* Leaflet marker */
-    const icon = L.divIcon({
-      className: '',
-      html: `<div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#15803d);border:3px solid #fff;box-shadow:0 4px 12px rgba(21,128,61,.4);display:flex;align-items:center;justify-content:center;font-size:13px">🏪</div>`,
-      iconSize: [32,32], iconAnchor: [16,16]
-    });
-    const popup = `
-      <div style="font-family:'Kanit',sans-serif;min-width:240px;line-height:1.65">
-        <div style="font-size:15px;font-weight:700;color:#14532d">${m.name}</div>
-        <div style="font-size:12px;color:#16a34a;font-weight:600;margin:2px 0 8px">${regionEmoji[m.region]} ภาค${m.region} · ${m.province}</div>
-        <hr style="border:0;border-top:1px solid #e5e7eb;margin:0 0 8px">
-        <div style="font-size:12px;color:#374151">
-          🏪 <b>${m.type}</b><br>
-          📐 พื้นที่ <b>${m.area}</b><br>
-          ⏰ เวลาทำการ <b>${m.time}</b>
-        </div>
-        <div style="margin-top:8px;padding:8px 10px;background:#f0fdf4;border-radius:8px;font-size:11.5px;color:#374151;line-height:1.6">${m.detail}</div>
-      </div>`;
-    const mk = L.marker([m.lat, m.lon], { icon }).bindPopup(popup, { maxWidth: 280 }).addTo(map);
-    markers[m.id] = mk;
-
-    /* sidebar card */
     const card = document.createElement('div');
     card.className = 'market-item';
     card.dataset.region = m.region;
@@ -412,13 +320,16 @@ tabs.forEach(tab => {
     card.addEventListener('click', () => {
       document.querySelectorAll('.market-item').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
-      map.flyTo([m.lat, m.lon], 10, { duration: 0.9 });
-      setTimeout(() => mk.openPopup(), 900);
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (mapRef) {
+        mapRef.flyTo([m.lat, m.lon], 10, { duration: 0.9 });
+        setTimeout(() => markerMap[m.id]?.openPopup(), 950);
+      }
     });
     listEl.appendChild(card);
   });
 
-  /* region filter */
+  // ── STEP 2: Region filter tabs (ไม่ขึ้นกับ Leaflet) ──
   document.querySelectorAll('.rtab').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.rtab').forEach(b => b.classList.remove('active'));
@@ -427,13 +338,98 @@ tabs.forEach(tab => {
       document.querySelectorAll('.market-item').forEach(c => {
         c.classList.toggle('hidden', r !== 'all' && c.dataset.region !== r);
       });
-      if (r !== 'all') {
-        const first = MARKETS.find(m => m.region === r);
-        if (first) map.flyTo([first.lat, first.lon], 8, { duration: 0.8 });
-      } else {
-        map.flyTo([13.0, 101.5], 6, { duration: 0.8 });
+      if (mapRef) {
+        if (r !== 'all') {
+          const first = MARKETS.find(m => m.region === r);
+          if (first) mapRef.flyTo([first.lat, first.lon], 8, { duration: 0.8 });
+        } else {
+          mapRef.flyTo([13.0, 101.5], 6, { duration: 0.8 });
+        }
       }
     });
+  });
+
+  // ── STEP 3: Leaflet map (graceful degradation) ──
+  if (typeof L === 'undefined') {
+    mapEl.innerHTML = `<div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-radius:18px;font-family:Kanit;color:#374151;text-align:center;padding:20px"><span style="font-size:3rem">🗺️</span><p style="font-weight:600">โหลด Leaflet ไม่สำเร็จ</p><small style="color:#6b7280">กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต</small></div>`;
+    return;
+  }
+
+  // Loading indicator inside map container
+  mapEl.insertAdjacentHTML('afterbegin',
+    '<div id="mapLoader" style="position:absolute;inset:0;z-index:500;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(135deg,#dcfce7,#f0fdf4);border-radius:18px;font-family:Kanit;color:#374151"><div style="width:40px;height:40px;border-radius:50%;border:4px solid #bbf7d0;border-top-color:#16a34a;animation:spin 0.8s linear infinite"></div><span style="font-weight:500">กำลังโหลดแผนที่...</span></div>');
+
+  const map = L.map(mapEl, { center: [13.0, 101.5], zoom: 6, maxZoom: 11, minZoom: 5 });
+  mapRef = map;
+
+  const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>',
+    opacity: 0.7
+  }).addTo(map);
+
+  const removeLoader = () => document.getElementById('mapLoader')?.remove();
+  tiles.once('tileload', removeLoader);
+  setTimeout(removeLoader, 10000); // fallback
+
+  // InvalidateSize เมื่อ section เลื่อนเข้ามา
+  new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) map.invalidateSize({ animate: false });
+  }, { threshold: 0.05 }).observe(mapEl);
+
+  // ── Province GeoJSON ──
+  let geojsonLayer = null;
+  fetch('https://raw.githubusercontent.com/apisit/thailand.json/master/thailand.json')
+    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+    .then(data => {
+      geojsonLayer = L.geoJSON(data, {
+        style: f => {
+          const p = getPD(f.properties.Province);
+          return { color:'#fff', weight:0.8,
+            fillColor: p ? regionColor[p.region] || '#22c55e' : '#22c55e',
+            fillOpacity: 0.38 };
+        },
+        onEachFeature: (f, layer) => {
+          const p = getPD(f.properties.Province);
+          if (!p) return;
+          layer.bindTooltip(`
+            <div style="font-family:'Kanit',sans-serif;min-width:190px;line-height:1.7">
+              <strong style="font-size:14px;color:#14532d">${p.th}</strong>
+              <div style="font-size:11px;color:#6b7280">${f.properties.Province}</div>
+              <hr style="border:0;border-top:1px solid #e5e7eb;margin:6px 0">
+              <span style="font-size:12px">
+                📐 พื้นที่ <b>${p.area.toLocaleString()}</b> ตร.กม.<br>
+                👥 ประชากร <b>${p.pop.toLocaleString()}</b> คน<br>
+                🗺️ ภาค <b>${p.region}</b>
+              </span>
+            </div>`, { sticky:true, opacity:1 });
+          layer.on({
+            mouseover: e => { e.target.setStyle({ fillOpacity:0.75, weight:2, color:'#14532d' }); e.target.bringToFront(); },
+            mouseout:  e => { geojsonLayer.resetStyle(e.target); }
+          });
+        }
+      }).addTo(map);
+    })
+    .catch(() => {}); // provinces optional — markers still work
+
+  // ── Market markers ──
+  MARKETS.forEach(m => {
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#15803d);border:3px solid #fff;box-shadow:0 4px 12px rgba(21,128,61,.45);display:flex;align-items:center;justify-content:center;font-size:14px">🏪</div>`,
+      iconSize:[32,32], iconAnchor:[16,16]
+    });
+    const popup = `
+      <div style="font-family:'Kanit',sans-serif;min-width:240px;line-height:1.65">
+        <div style="font-size:15px;font-weight:700;color:#14532d">${m.name}</div>
+        <div style="font-size:12px;color:#16a34a;font-weight:600;margin:2px 0 8px">${regionEmoji[m.region]} ภาค${m.region} · ${m.province}</div>
+        <hr style="border:0;border-top:1px solid #e5e7eb;margin:0 0 8px">
+        <div style="font-size:12px;color:#374151">
+          🏪 <b>${m.type}</b><br>📐 พื้นที่ <b>${m.area}</b><br>⏰ เวลา <b>${m.time}</b>
+        </div>
+        <div style="margin-top:8px;padding:8px 10px;background:#f0fdf4;border-radius:8px;font-size:11.5px;color:#374151;line-height:1.6">${m.detail}</div>
+      </div>`;
+    const mk = L.marker([m.lat, m.lon], { icon }).bindPopup(popup, { maxWidth:280 }).addTo(map);
+    markerMap[m.id] = mk;
   });
 })();
 
