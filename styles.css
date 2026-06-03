@@ -206,60 +206,106 @@ img { max-width: 100%; }
 
 /* ===== Diseases ===== */
 .disease-tabs {
-  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 36px;
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 44px; padding: 6px; background: var(--green-100);
+  border-radius: 999px; width: fit-content; margin-left: auto; margin-right: auto;
 }
 .dtab {
-  padding: 9px 20px; border-radius: 999px; border: 1.5px solid var(--line);
-  background: #fff; font-family: 'Kanit'; font-size: .9rem; font-weight: 500;
-  color: var(--muted); cursor: pointer; transition: all .2s ease;
+  padding: 10px 22px; border-radius: 999px; border: none;
+  background: transparent; font-family: 'Kanit'; font-size: .9rem; font-weight: 500;
+  color: var(--muted); cursor: pointer; transition: all .22s ease; white-space: nowrap;
 }
-.dtab:hover { border-color: var(--green-400, #4ade80); color: var(--green-700); }
-.dtab.active { background: var(--green-600); color: #fff; border-color: var(--green-600); box-shadow: 0 6px 16px rgba(22,163,74,.3); }
+.dtab:hover { color: var(--green-700); background: rgba(255,255,255,.6); }
+.dtab.active {
+  background: #fff; color: var(--green-800, #166534);
+  box-shadow: 0 2px 12px rgba(20,83,45,.15); font-weight: 600;
+}
 
 .disease-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
 }
 .dcard {
-  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
-  overflow: hidden; box-shadow: var(--shadow-sm);
-  transition: transform .22s ease, box-shadow .22s ease;
+  background: #fff; border-radius: 20px; overflow: hidden;
+  box-shadow: 0 2px 16px rgba(20,83,45,.08);
+  transition: transform .25s ease, box-shadow .25s ease;
   display: flex; flex-direction: column;
 }
-.dcard:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.dcard:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(20,83,45,.16); }
 .dcard.hidden { display: none; }
 
+/* Image area with title overlay */
 .dcard-img {
-  position: relative; height: 190px; overflow: hidden; background: var(--green-100);
-  display: flex; align-items: center; justify-content: center;
+  position: relative; height: 220px; overflow: hidden; background: var(--green-900);
+  flex-shrink: 0;
 }
-.dcard-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
-.dcard:hover .dcard-img img { transform: scale(1.05); }
-.dcard-img.img-err::after {
-  content: '🌿'; font-size: 3rem;
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  background: var(--green-100);
+.dcard-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .5s ease; opacity: .85;
 }
+.dcard:hover .dcard-img img { transform: scale(1.08); opacity: .75; }
+
+/* Gradient overlay + title on image */
+.dcard-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,30,15,.85) 40%, rgba(0,0,0,.1) 100%);
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 18px 20px;
+}
+.dcard-img-overlay h3 {
+  font-family: 'Kanit'; font-size: 1.22rem; font-weight: 600;
+  color: #fff; margin-bottom: 4px; line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.dcard-img-overlay .sci-name {
+  font-size: .75rem; color: rgba(255,255,255,.7); font-style: italic; margin: 0;
+}
+
+/* error fallback */
+.dcard-img.img-err { background: var(--green-100); }
 .dcard-img.img-err img { display: none; }
-
-.dtype-badge {
-  position: absolute; top: 10px; right: 10px;
-  padding: 4px 12px; border-radius: 999px; font-size: .72rem; font-weight: 600;
-  font-family: 'Kanit'; letter-spacing: .3px; backdrop-filter: blur(6px);
+.dcard-img.img-err::before {
+  content: '🌿'; font-size: 4rem;
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--green-100), var(--green-200,#bbf7d0));
 }
-.dtype-badge.fungal   { background: rgba(217,119,6,.9);  color: #fff; }
-.dtype-badge.bacterial{ background: rgba(37,99,235,.9);  color: #fff; }
-.dtype-badge.viral    { background: rgba(220,38,38,.9);  color: #fff; }
-.dtype-badge.oomycete { background: rgba(15,118,110,.9); color: #fff; }
 
-.dcard-body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
-.dcard-body h3 { font-size: 1.12rem; color: var(--green-900); margin-bottom: 4px; }
-.sci-name { font-size: .78rem; color: var(--muted); margin-bottom: 14px; }
+/* Type badge — top-right corner */
+.dtype-badge {
+  position: absolute; top: 14px; right: 14px;
+  padding: 5px 13px; border-radius: 999px;
+  font-size: .72rem; font-weight: 700; font-family: 'Kanit';
+  letter-spacing: .4px; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.25);
+}
+.dtype-badge.fungal    { background: rgba(180,83,9,.88);  color: #fff; }
+.dtype-badge.bacterial { background: rgba(29,78,216,.88); color: #fff; }
+.dtype-badge.viral     { background: rgba(185,28,28,.88); color: #fff; }
+.dtype-badge.oomycete  { background: rgba(13,148,136,.88);color: #fff; }
 
-.dcard-detail { display: flex; flex-direction: column; gap: 12px; flex: 1; }
-.detail-block h4 { font-size: .85rem; font-family: 'Kanit'; font-weight: 600; color: var(--green-800, #166534); margin-bottom: 6px; }
-.detail-block.sym p { font-size: .86rem; color: #3d5041; line-height: 1.6; }
-.detail-block.prev ul { padding-left: 16px; }
-.detail-block.prev li { font-size: .83rem; color: var(--muted); margin-bottom: 4px; line-height: 1.55; }
+/* Card body */
+.dcard-body {
+  padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; gap: 14px;
+}
+
+/* Symptoms block */
+.detail-block { display: flex; flex-direction: column; gap: 6px; }
+.detail-block h4 {
+  display: flex; align-items: center; gap: 6px;
+  font-size: .82rem; font-family: 'Kanit'; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .8px; color: var(--muted);
+}
+.detail-block.sym { background: var(--green-50); border-radius: 12px; padding: 12px 14px; }
+.detail-block.sym p { font-size: .88rem; color: #374840; line-height: 1.65; margin: 0; }
+
+/* Prevention block */
+.detail-block.prev { border-top: 1px solid var(--line); padding-top: 14px; }
+.detail-block.prev ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.detail-block.prev li {
+  font-size: .85rem; color: var(--muted); line-height: 1.5;
+  padding-left: 18px; position: relative;
+}
+.detail-block.prev li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--green-500); font-weight: 700; font-size: .8rem;
+}
 
 /* ===== Recipes ===== */
 .cards-grid.recipes { grid-template-columns: repeat(3, 1fr); }
