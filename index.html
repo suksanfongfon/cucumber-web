@@ -257,11 +257,12 @@
 
       <!-- Filter tabs -->
       <div class="disease-tabs" id="diseaseTabs">
-        <button class="dtab active" data-filter="all">ทั้งหมด (8)</button>
-        <button class="dtab" data-filter="fungal">โรคเชื้อรา</button>
-        <button class="dtab" data-filter="bacterial">โรคแบคทีเรีย</button>
-        <button class="dtab" data-filter="viral">โรคไวรัส</button>
-        <button class="dtab" data-filter="oomycete">โรคราน้ำ</button>
+        <button class="dtab active" data-filter="all">ทั้งหมด (14)</button>
+        <button class="dtab" data-filter="fungal">🍄 เชื้อรา</button>
+        <button class="dtab" data-filter="oomycete">💧 ราน้ำ</button>
+        <button class="dtab" data-filter="viral">🧬 ไวรัส</button>
+        <button class="dtab" data-filter="bacterial">🦠 แบคทีเรีย</button>
+        <button class="dtab" data-filter="nematode">🪱 ไส้เดือนฝอย</button>
       </div>
 
       <div class="disease-grid" id="diseaseGrid">
@@ -498,7 +499,330 @@
           </div>
         </article>
 
+        <!-- 9 Cercospora -->
+        <article class="dcard" data-type="fungal">
+          <div class="dcard-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Cercospora_leaf_spot_on_cucurbit.jpg"
+                 alt="โรคใบจุด Cercospora" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-err')" />
+            <span class="dtype-badge fungal">เชื้อรา</span>
+            <div class="dcard-img-overlay">
+              <h3>โรคใบจุด Cercospora</h3>
+              <p class="sci-name"><em>Cercospora citrullina</em></p>
+            </div>
+          </div>
+          <div class="dcard-body">
+            <div class="detail-block sym">
+              <h4>🔍 อาการ</h4>
+              <p>ใบมีจุดกลมสีน้ำตาลหรือเทา มีขอบสีเหลืองล้อมรอบ ใจกลางจุดสีซีด พบในสภาพชื้นและแสงน้อย ใบแก่เป็นโรคก่อน</p>
+            </div>
+            <div class="detail-block prev">
+              <h4>🛡️ วิธีป้องกัน</h4>
+              <ul>
+                <li>ฉีดพ่นสารคลอโรทาโลนิลหรือแมนโคเซบ</li>
+                <li>ตัดใบที่เป็นโรคออกและเผาทำลาย</li>
+                <li>ปรับปรุงการระบายอากาศ</li>
+                <li>หมุนเวียนพืชและกำจัดซากพืช</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 10 Bacterial Wilt -->
+        <article class="dcard" data-type="bacterial">
+          <div class="dcard-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Bacterial_wilt_cucumber.jpg"
+                 alt="โรคเหี่ยวแบคทีเรีย" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-err')" />
+            <span class="dtype-badge bacterial">แบคทีเรีย</span>
+            <div class="dcard-img-overlay">
+              <h3>โรคเหี่ยวแบคทีเรีย</h3>
+              <p class="sci-name"><em>Erwinia tracheiphila</em></p>
+            </div>
+          </div>
+          <div class="dcard-body">
+            <div class="detail-block sym">
+              <h4>🔍 อาการ</h4>
+              <p>ต้นเหี่ยวอย่างรวดเร็ว ดึงลำต้นขาดแล้วดึงออกช้า ๆ จะเห็นเส้นใยเมือกเหนียว พาหะหลักคือด้วงแตง (Diabrotica)</p>
+            </div>
+            <div class="detail-block prev">
+              <h4>🛡️ วิธีป้องกัน</h4>
+              <ul>
+                <li>ควบคุมด้วงแตงพาหะด้วยสารฆ่าแมลง</li>
+                <li>ใช้ตาข่ายกันแมลงในระยะต้นกล้า</li>
+                <li>ถอนและทำลายต้นที่เป็นโรคทันที</li>
+                <li>ใช้พันธุ์ที่มีความต้านทาน</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 11 WMV -->
+        <article class="dcard" data-type="viral">
+          <div class="dcard-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/WMV_on_cucurbit_leaf.jpg"
+                 alt="โรคโมเสกแตงโม WMV" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-err')" />
+            <span class="dtype-badge viral">ไวรัส</span>
+            <div class="dcard-img-overlay">
+              <h3>โรคโมเสกแตงโม (WMV)</h3>
+              <p class="sci-name"><em>Watermelon Mosaic Virus</em></p>
+            </div>
+          </div>
+          <div class="dcard-body">
+            <div class="detail-block sym">
+              <h4>🔍 อาการ</h4>
+              <p>ใบด่างเหลืองสลับเขียว หงิก งอ เสียรูป คล้าย CMV แต่มักรุนแรงกว่า ผลมีลายด่าง ผิวขรุขระ ต้นแคระแกร็น</p>
+            </div>
+            <div class="detail-block prev">
+              <h4>🛡️ วิธีป้องกัน</h4>
+              <ul>
+                <li>ควบคุมเพลี้ยอ่อนพาหะ</li>
+                <li>กำจัดวัชพืชโฮสต์รอบแปลง</li>
+                <li>ใช้สะท้อนแสงเงินไล่เพลี้ย</li>
+                <li>ถอนต้นที่แสดงอาการทันที</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 12 ZYMV -->
+        <article class="dcard" data-type="viral">
+          <div class="dcard-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/ZYMV_zucchini_yellow_mosaic.jpg"
+                 alt="โรคเหลืองแตง ZYMV" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-err')" />
+            <span class="dtype-badge viral">ไวรัส</span>
+            <div class="dcard-img-overlay">
+              <h3>โรคเหลืองแตง (ZYMV)</h3>
+              <p class="sci-name"><em>Zucchini Yellow Mosaic Virus</em></p>
+            </div>
+          </div>
+          <div class="dcard-body">
+            <div class="detail-block sym">
+              <h4>🔍 อาการ</h4>
+              <p>ใบเหลืองสดใส ด่างเขียว-เหลืองชัดเจน ใบหดย่น บิดเบี้ยว ผลเสียรูปสีซีด ระบาดรุนแรงในอากาศร้อน</p>
+            </div>
+            <div class="detail-block prev">
+              <h4>🛡️ วิธีป้องกัน</h4>
+              <ul>
+                <li>ควบคุมเพลี้ยอ่อนพาหะ</li>
+                <li>ปลูกในโรงเรือนตาข่าย</li>
+                <li>ใช้น้ำมันพืชเจือจางสเปรย์ลดการเกาะของเพลี้ย</li>
+                <li>กำจัดต้นที่ติดเชื้อทันที</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 13 ToLCNDV -->
+        <article class="dcard" data-type="viral">
+          <div class="dcard-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/ToLCNDV_symptoms_cucurbit.jpg"
+                 alt="โรคใบงอเหลือง ToLCNDV" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-err')" />
+            <span class="dtype-badge viral">ไวรัส</span>
+            <div class="dcard-img-overlay">
+              <h3>โรคใบงอเหลือง (ToLCNDV)</h3>
+              <p class="sci-name"><em>Tomato Leaf Curl New Delhi Virus</em></p>
+            </div>
+          </div>
+          <div class="dcard-body">
+            <div class="detail-block sym">
+              <h4>🔍 อาการ</h4>
+              <p>ใบม้วนงอขึ้น สีเหลืองสด ต้นแคระแกร็น ผลน้อยและผิดรูป พาหะหลักคือแมลงหวี่ขาว (whitefly) ระบาดหนักในฤดูแล้ง</p>
+            </div>
+            <div class="detail-block prev">
+              <h4>🛡️ วิธีป้องกัน</h4>
+              <ul>
+                <li>ควบคุมแมลงหวี่ขาวด้วยสารอิมิดาโคลพริด</li>
+                <li>ใช้กับดักกาวเหลืองจับแมลง</li>
+                <li>ปลูกในโรงเรือนตาข่ายป้องกันแมลง</li>
+                <li>กำจัดต้นที่ติดเชื้อทันที</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 14 Root-knot Nematode -->
+        <article class="dcard" data-type="nematode">
+          <div class="dcard-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Meloidogyne_root_knot_nematode.jpg"
+                 alt="โรครากปม Meloidogyne" loading="lazy"
+                 onerror="this.parentElement.classList.add('img-err')" />
+            <span class="dtype-badge nematode">ไส้เดือนฝอย</span>
+            <div class="dcard-img-overlay">
+              <h3>โรครากปม</h3>
+              <p class="sci-name"><em>Meloidogyne</em> spp.</p>
+            </div>
+          </div>
+          <div class="dcard-body">
+            <div class="detail-block sym">
+              <h4>🔍 อาการ</h4>
+              <p>รากมีปุ่มปมนูนขนาดต่าง ๆ ต้นแคระแกร็น ใบเหลือง เหี่ยวในตอนบ่าย แม้ดินมีน้ำเพียงพอ ระบาดหนักในดินทรายร้อน</p>
+            </div>
+            <div class="detail-block prev">
+              <h4>🛡️ วิธีป้องกัน</h4>
+              <ul>
+                <li>อบดินด้วยความร้อนก่อนปลูก</li>
+                <li>ใช้สารไบโอเนมาติไซด์ เช่น Paecilomyces</li>
+                <li>หมุนเวียนด้วยพืชที่ไม่ใช่โฮสต์</li>
+                <li>ต่อกิ่งบนตอที่ต้านทานไส้เดือนฝอย</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
       </div><!-- /.disease-grid -->
+
+      <!-- Disease Matrix -->
+      <div class="disease-matrix-wrap">
+        <div class="matrix-head">
+          <h3>ตารางปัจจัยเสี่ยงต่อการเกิดโรค</h3>
+          <p>ความสัมพันธ์ระหว่างโรคและปัจจัยที่เอื้อต่อการระบาด</p>
+        </div>
+        <div class="matrix-legend">
+          <span class="ml H">H สูง</span>
+          <span class="ml M">M ปานกลาง</span>
+          <span class="ml L">L ต่ำ</span>
+          <span class="ml N">– ไม่มีนัยสำคัญ</span>
+        </div>
+        <div class="matrix-scroll">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th rowspan="2" class="col-disease">โรค</th>
+                <th rowspan="2" class="col-path">เชื้อก่อโรค</th>
+                <th rowspan="2" class="col-imp">ความสำคัญ</th>
+                <th colspan="5" class="col-group-header">🌡️ สภาพแวดล้อม</th>
+                <th colspan="3" class="col-group-header">🦠 ปัจจัยชีวภาพ</th>
+                <th colspan="4" class="col-group-header">🌱 การจัดการ</th>
+              </tr>
+              <tr>
+                <th class="col-sub">ความชื้นสูง</th>
+                <th class="col-sub">อุณหภูมิต่ำ</th>
+                <th class="col-sub">อุณหภูมิสูง</th>
+                <th class="col-sub">ฝนชุก</th>
+                <th class="col-sub">แสงน้อย</th>
+                <th class="col-sub">แมลงพาหะ</th>
+                <th class="col-sub">เชื้อในดิน</th>
+                <th class="col-sub">เชื้อบนเมล็ด</th>
+                <th class="col-sub">ปลูกหนาแน่น</th>
+                <th class="col-sub">ระบายน้ำไม่ดี</th>
+                <th class="col-sub">ดินขาดอาหาร</th>
+                <th class="col-sub">ไม่หมุนเวียน</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="mrow-header"><td colspan="15">🍄 โรคเชื้อรา &amp; ราน้ำ</td></tr>
+              <tr>
+                <td class="cn">ราน้ำค้าง</td><td class="cp">Pseudoperonospora cubensis</td>
+                <td><span class="ibadge ih">สำคัญมาก</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc M">M</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc M">M</span></td><td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc L">L</span></td>
+              </tr>
+              <tr>
+                <td class="cn">ราแป้ง</td><td class="cp">Podosphaera xanthii</td>
+                <td><span class="ibadge ih">สำคัญมาก</span></td>
+                <td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc H">H</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc L">L</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+              </tr>
+              <tr>
+                <td class="cn">แอนแทรคโนส</td><td class="cp">Colletotrichum orbiculare</td>
+                <td><span class="ibadge im">ปานกลาง</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc M">M</span></td><td><span class="mc H">H</span></td>
+                <td><span class="mc M">M</span></td><td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+              </tr>
+              <tr>
+                <td class="cn">เหี่ยว Fusarium</td><td class="cp">Fusarium oxysporum</td>
+                <td><span class="ibadge ih">สำคัญมาก</span></td>
+                <td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc M">M</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc L">L</span></td><td><span class="mc H">H</span></td>
+              </tr>
+              <tr>
+                <td class="cn">รากเน่า Pythium</td><td class="cp">Pythium aphanidermatum</td>
+                <td><span class="ibadge ih">สำคัญมาก</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc M">M</span></td>
+                <td><span class="mc M">M</span></td><td><span class="mc H">H</span></td><td><span class="mc L">L</span></td><td><span class="mc M">M</span></td>
+              </tr>
+              <tr>
+                <td class="cn">ใบจุด Cercospora</td><td class="cp">Cercospora citrullina</td>
+                <td><span class="ibadge il">น้อย</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td><td><span class="mc M">M</span></td><td><span class="mc M">M</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc L">L</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc M">M</span></td><td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+              </tr>
+              <tr>
+                <td class="cn">ลำต้นเน่า GSB</td><td class="cp">Didymella bryoniae</td>
+                <td><span class="ibadge im">ปานกลาง</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc M">M</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc M">M</span></td><td><span class="mc M">M</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+              </tr>
+
+              <tr class="mrow-header"><td colspan="15">🧬 โรคไวรัส</td></tr>
+              <tr>
+                <td class="cn">CMV โมเสกแตง</td><td class="cp">Cucumber Mosaic Virus</td>
+                <td><span class="ibadge ih">สำคัญมาก</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+              </tr>
+              <tr>
+                <td class="cn">WMV โมเสกแตงโม</td><td class="cp">Watermelon Mosaic Virus</td>
+                <td><span class="ibadge im">ปานกลาง</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+              </tr>
+              <tr>
+                <td class="cn">ZYMV เหลืองแตง</td><td class="cp">Zucchini Yellow Mosaic Virus</td>
+                <td><span class="ibadge im">ปานกลาง</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+              </tr>
+              <tr>
+                <td class="cn">ToLCNDV ใบงอเหลือง</td><td class="cp">Tomato Leaf Curl New Delhi Virus</td>
+                <td><span class="ibadge ih">สำคัญมาก</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+              </tr>
+
+              <tr class="mrow-header"><td colspan="15">🦠 โรคแบคทีเรีย &amp; 🪱 ไส้เดือนฝอย</td></tr>
+              <tr>
+                <td class="cn">เหี่ยวแบคทีเรีย</td><td class="cp">Erwinia tracheiphila</td>
+                <td><span class="ibadge ih">สำคัญมาก</span></td>
+                <td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+              </tr>
+              <tr>
+                <td class="cn">ใบจุดเหลี่ยม ALS</td><td class="cp">Pseudomonas syringae</td>
+                <td><span class="ibadge im">ปานกลาง</span></td>
+                <td><span class="mc H">H</span></td><td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+                <td><span class="mc M">M</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc M">M</span></td>
+              </tr>
+              <tr>
+                <td class="cn">รากปม</td><td class="cp">Meloidogyne spp.</td>
+                <td><span class="ibadge ih">สำคัญมาก</span></td>
+                <td><span class="mc M">M</span></td><td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc H">H</span></td><td><span class="mc N">–</span></td>
+                <td><span class="mc N">–</span></td><td><span class="mc M">M</span></td><td><span class="mc M">M</span></td><td><span class="mc H">H</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="matrix-note">พาหะหลักของไวรัส CMV/WMV/ZYMV คือเพลี้ยอ่อน · ToLCNDV พาหะคือแมลงหวี่ขาว · Bacterial Wilt พาหะคือด้วงแตง (Diabrotica)</p>
+      </div>
+
     </div>
   </section>
 
