@@ -619,6 +619,50 @@ img { max-width: 100%; }
   padding: 14px 24px; background: var(--green-50); border-top: 1px solid var(--line);
 }
 
+/* ===== Menu Gateway ===== */
+.menu-gateway {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  background: linear-gradient(135deg, var(--green-900) 0%, var(--green-700) 100%);
+  border-radius: 20px; padding: 28px 32px; margin-bottom: 32px;
+  text-decoration: none; color: inherit;
+  box-shadow: 0 8px 30px rgba(20,83,45,.25);
+  transition: transform .22s ease, box-shadow .22s ease;
+  position: relative; overflow: hidden;
+}
+.menu-gateway::before {
+  content: ''; position: absolute; right: -40px; top: -40px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: rgba(255,255,255,.05); pointer-events: none;
+}
+.menu-gateway:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(20,83,45,.35); }
+
+.mg-left { display: flex; align-items: flex-start; gap: 20px; flex: 1; min-width: 0; }
+.mg-icon { font-size: 3rem; line-height: 1; flex: 0 0 auto;
+  animation: float 4s ease-in-out infinite; }
+.mg-left h3 { font-size: 1.3rem; color: #fff; margin-bottom: 6px; font-family:'Kanit'; }
+.mg-left p  { font-size: .92rem; color: rgba(255,255,255,.8); line-height: 1.6; margin-bottom: 12px; }
+.mg-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.mg-badges span {
+  background: rgba(255,255,255,.15); color: #fff;
+  font-size: .75rem; padding: 4px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.2); font-family:'Kanit'; font-weight: 500;
+}
+.mg-right { flex: 0 0 auto; }
+.mg-btn {
+  display: inline-block; background: #fff; color: var(--green-800,#166534);
+  font-family: 'Kanit'; font-weight: 700; font-size: 1rem;
+  padding: 13px 26px; border-radius: 999px; white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(0,0,0,.2);
+  transition: background .18s ease, transform .18s ease;
+}
+.menu-gateway:hover .mg-btn { background: var(--green-50); transform: scale(1.04); }
+
+@media (max-width: 680px) {
+  .menu-gateway { flex-direction: column; padding: 22px 20px; }
+  .mg-right { width: 100%; }
+  .mg-btn { width: 100%; text-align: center; display: block; }
+}
+
 /* ===== Recipes ===== */
 .cards-grid.recipes { grid-template-columns: repeat(3, 1fr); }
 .rcard {
