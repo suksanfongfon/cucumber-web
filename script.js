@@ -151,6 +151,31 @@ const io = new IntersectionObserver((entries) => {
 
 revealEls.forEach(el => io.observe(el));
 
+// ===== Lazada Affiliate Link Enhancer =====
+// เรียก /api/lazada เพื่อแปลง direct links เป็น affiliate links หลัง DOM render
+async function enhanceLazadaLinks() {
+  const btns = document.querySelectorAll('a.lazada-btn[href*="lazada.co.th"]');
+  if (!btns.length) return;
+
+  await Promise.all([...btns].map(async btn => {
+    const originalUrl = btn.href;
+    try {
+      const res = await fetch(`/api/lazada?url=${encodeURIComponent(originalUrl)}`);
+      if (!res.ok) return;
+      const { affiliate_url, fallback } = await res.json();
+      if (!fallback && affiliate_url) {
+        btn.href = affiliate_url;
+        btn.dataset.affiliate = 'true';
+      }
+    } catch {
+      // ถ้า API ไม่พร้อม ใช้ URL เดิม
+    }
+  }));
+}
+
+// รอให้ seasonal section render เสร็จก่อนถึงค่อย enhance
+setTimeout(enhanceLazadaLinks, 300);
+
 // ===== Seasonal Disease Alert =====
 (function initSeasonal() {
   const monthEl  = document.getElementById('seasonMonth');
