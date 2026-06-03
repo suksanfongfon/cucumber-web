@@ -85,6 +85,274 @@ tabs.forEach(tab => {
   });
 });
 
+// ===== Thailand Map =====
+(function initThaiMap() {
+  if (!document.getElementById('thaiMap') || typeof L === 'undefined') return;
+
+  const map = L.map('thaiMap', { center: [13.0, 101.5], zoom: 6, maxZoom: 11, minZoom: 5 });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>',
+    opacity: 0.65
+  }).addTo(map);
+
+  /* --- Province data (77 จังหวัด) --- */
+  const PD = {
+    "Bangkok":{"th":"กรุงเทพมหานคร","area":1569,"pop":10539000,"region":"กลาง"},
+    "Samut Prakan":{"th":"สมุทรปราการ","area":1004,"pop":1344000,"region":"กลาง"},
+    "Nonthaburi":{"th":"นนทบุรี","area":622,"pop":1592000,"region":"กลาง"},
+    "Pathum Thani":{"th":"ปทุมธานี","area":1526,"pop":1202000,"region":"กลาง"},
+    "Phra Nakhon Si Ayutthaya":{"th":"พระนครศรีอยุธยา","area":2557,"pop":832000,"region":"กลาง"},
+    "Ang Thong":{"th":"อ่างทอง","area":968,"pop":289000,"region":"กลาง"},
+    "Lop Buri":{"th":"ลพบุรี","area":6199,"pop":758000,"region":"กลาง"},
+    "Sing Buri":{"th":"สิงห์บุรี","area":822,"pop":215000,"region":"กลาง"},
+    "Chai Nat":{"th":"ชัยนาท","area":2470,"pop":335000,"region":"กลาง"},
+    "Saraburi":{"th":"สระบุรี","area":3576,"pop":661000,"region":"กลาง"},
+    "Nakhon Nayok":{"th":"นครนายก","area":2122,"pop":264000,"region":"กลาง"},
+    "Suphan Buri":{"th":"สุพรรณบุรี","area":5358,"pop":849000,"region":"กลาง"},
+    "Nakhon Pathom":{"th":"นครปฐม","area":2168,"pop":930000,"region":"กลาง"},
+    "Samut Sakhon":{"th":"สมุทรสาคร","area":872,"pop":563000,"region":"กลาง"},
+    "Samut Songkhram":{"th":"สมุทรสงคราม","area":416,"pop":192000,"region":"กลาง"},
+    "Chon Buri":{"th":"ชลบุรี","area":4363,"pop":1542000,"region":"ตะวันออก"},
+    "Rayong":{"th":"ระยอง","area":3552,"pop":718000,"region":"ตะวันออก"},
+    "Chanthaburi":{"th":"จันทบุรี","area":6338,"pop":541000,"region":"ตะวันออก"},
+    "Trat":{"th":"ตราด","area":2819,"pop":240000,"region":"ตะวันออก"},
+    "Chachoengsao":{"th":"ฉะเชิงเทรา","area":5351,"pop":726000,"region":"ตะวันออก"},
+    "Prachin Buri":{"th":"ปราจีนบุรี","area":4762,"pop":470000,"region":"ตะวันออก"},
+    "Sa Kaeo":{"th":"สระแก้ว","area":7195,"pop":562000,"region":"ตะวันออก"},
+    "Nakhon Ratchasima":{"th":"นครราชสีมา","area":20494,"pop":2665000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Buri Ram":{"th":"บุรีรัมย์","area":10322,"pop":1589000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Surin":{"th":"สุรินทร์","area":8124,"pop":1395000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Si Sa Ket":{"th":"ศรีสะเกษ","area":8840,"pop":1477000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Ubon Ratchathani":{"th":"อุบลราชธานี","area":15745,"pop":1870000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Yasothon":{"th":"ยโสธร","area":4162,"pop":545000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Chaiyaphum":{"th":"ชัยภูมิ","area":12778,"pop":1132000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Amnat Charoen":{"th":"อำนาจเจริญ","area":3161,"pop":376000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Bueng Kan":{"th":"บึงกาฬ","area":4305,"pop":411000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Nong Bua Lam Phu":{"th":"หนองบัวลำภู","area":3859,"pop":506000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Khon Kaen":{"th":"ขอนแก่น","area":10886,"pop":1786000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Udon Thani":{"th":"อุดรธานี","area":11730,"pop":1564000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Loei":{"th":"เลย","area":11425,"pop":643000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Nong Khai":{"th":"หนองคาย","area":3027,"pop":518000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Maha Sarakham":{"th":"มหาสารคาม","area":5292,"pop":948000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Roi Et":{"th":"ร้อยเอ็ด","area":8299,"pop":1297000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Kalasin":{"th":"กาฬสินธุ์","area":6947,"pop":986000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Sakon Nakhon":{"th":"สกลนคร","area":9606,"pop":1128000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Nakhon Phanom":{"th":"นครพนม","area":5513,"pop":712000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Mukdahan":{"th":"มุกดาหาร","area":4340,"pop":358000,"region":"ตะวันออกเฉียงเหนือ"},
+    "Chiang Mai":{"th":"เชียงใหม่","area":20107,"pop":1835000,"region":"เหนือ"},
+    "Lamphun":{"th":"ลำพูน","area":4507,"pop":408000,"region":"เหนือ"},
+    "Lampang":{"th":"ลำปาง","area":12534,"pop":762000,"region":"เหนือ"},
+    "Uttaradit":{"th":"อุตรดิตถ์","area":7839,"pop":464000,"region":"เหนือ"},
+    "Phrae":{"th":"แพร่","area":6538,"pop":471000,"region":"เหนือ"},
+    "Nan":{"th":"น่าน","area":11472,"pop":484000,"region":"เหนือ"},
+    "Phayao":{"th":"พะเยา","area":6335,"pop":486000,"region":"เหนือ"},
+    "Chiang Rai":{"th":"เชียงราย","area":11678,"pop":1278000,"region":"เหนือ"},
+    "Mae Hong Son":{"th":"แม่ฮ่องสอน","area":12681,"pop":280000,"region":"เหนือ"},
+    "Nakhon Sawan":{"th":"นครสวรรค์","area":9598,"pop":1120000,"region":"เหนือ"},
+    "Uthai Thani":{"th":"อุทัยธานี","area":6730,"pop":337000,"region":"เหนือ"},
+    "Kamphaeng Phet":{"th":"กำแพงเพชร","area":8607,"pop":731000,"region":"เหนือ"},
+    "Sukhothai":{"th":"สุโขทัย","area":6596,"pop":608000,"region":"เหนือ"},
+    "Phitsanulok":{"th":"พิษณุโลก","area":10816,"pop":863000,"region":"เหนือ"},
+    "Phichit":{"th":"พิจิตร","area":4531,"pop":526000,"region":"เหนือ"},
+    "Phetchabun":{"th":"เพชรบูรณ์","area":12668,"pop":1025000,"region":"เหนือ"},
+    "Tak":{"th":"ตาก","area":16406,"pop":538000,"region":"ตะวันตก"},
+    "Ratchaburi":{"th":"ราชบุรี","area":5196,"pop":882000,"region":"ตะวันตก"},
+    "Kanchanaburi":{"th":"กาญจนบุรี","area":19483,"pop":893000,"region":"ตะวันตก"},
+    "Phetchaburi":{"th":"เพชรบุรี","area":6225,"pop":491000,"region":"ตะวันตก"},
+    "Prachuap Khiri Khan":{"th":"ประจวบคีรีขันธ์","area":6368,"pop":551000,"region":"ตะวันตก"},
+    "Nakhon Si Thammarat":{"th":"นครศรีธรรมราช","area":9942,"pop":1556000,"region":"ใต้"},
+    "Krabi":{"th":"กระบี่","area":4708,"pop":472000,"region":"ใต้"},
+    "Phang Nga":{"th":"พังงา","area":4170,"pop":261000,"region":"ใต้"},
+    "Phuket":{"th":"ภูเก็ต","area":576,"pop":418000,"region":"ใต้"},
+    "Surat Thani":{"th":"สุราษฎร์ธานี","area":12891,"pop":1065000,"region":"ใต้"},
+    "Ranong":{"th":"ระนอง","area":3298,"pop":186000,"region":"ใต้"},
+    "Chumphon":{"th":"ชุมพร","area":6009,"pop":521000,"region":"ใต้"},
+    "Songkhla":{"th":"สงขลา","area":7394,"pop":1436000,"region":"ใต้"},
+    "Satun":{"th":"สตูล","area":2479,"pop":324000,"region":"ใต้"},
+    "Trang":{"th":"ตรัง","area":4941,"pop":625000,"region":"ใต้"},
+    "Phatthalung":{"th":"พัทลุง","area":3424,"pop":524000,"region":"ใต้"},
+    "Pattani":{"th":"ปัตตานี","area":1940,"pop":750000,"region":"ใต้"},
+    "Yala":{"th":"ยะลา","area":4521,"pop":523000,"region":"ใต้"},
+    "Narathiwat":{"th":"นราธิวาส","area":4475,"pop":827000,"region":"ใต้"}
+  };
+
+  /* aliases ที่ GeoJSON อาจใช้ชื่อต่างออกไป */
+  const ALIAS = {
+    "Krung Thep Maha Nakhon":"Bangkok","Bangkok Metropolis":"Bangkok",
+    "Lopburi":"Lop Buri","Prachinburi":"Prachin Buri",
+    "Phang-nga":"Phang Nga","Phangnga":"Phang Nga",
+    "Samut Songkram":"Samut Songkhram","Nakhon Ratchasima":"Nakhon Ratchasima",
+    "Buriram":"Buri Ram","Sisaket":"Si Sa Ket","Ubon Ratchathani":"Ubon Ratchathani",
+    "Nong Bualamphu":"Nong Bua Lam Phu","Khon Kaen":"Khon Kaen",
+    "Mahasarakham":"Maha Sarakham","Roi-Et":"Roi Et",
+    "Sakonnakhon":"Sakon Nakhon","Nakonphanom":"Nakhon Phanom",
+    "Chiangmai":"Chiang Mai","Chiangrai":"Chiang Rai",
+    "Maehongson":"Mae Hong Son","Nakornsawan":"Nakhon Sawan",
+    "Kamphaengphet":"Kamphaeng Phet","Phitsanulok":"Phitsanulok",
+    "Phetchaboon":"Phetchabun","Kanchanaburi":"Kanchanaburi",
+    "Petchaburi":"Phetchaburi","Prachuap Khiri Khan":"Prachuap Khiri Khan",
+    "Nakorn Si Thammarat":"Nakhon Si Thammarat","Suratthani":"Surat Thani",
+    "Songkla":"Songkhla","Phattalung":"Phatthalung"
+  };
+
+  function getPD(name) { return PD[name] || PD[ALIAS[name]] || null; }
+
+  const regionColor = {
+    "เหนือ":"#10b981","กลาง":"#3b82f6","ตะวันออก":"#8b5cf6",
+    "ตะวันออกเฉียงเหนือ":"#f59e0b","ตะวันตก":"#ec4899","ใต้":"#ef4444"
+  };
+
+  let geojsonLayer = null;
+
+  fetch('https://raw.githubusercontent.com/apisit/thailand.json/master/thailand.json')
+    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+    .then(data => {
+      geojsonLayer = L.geoJSON(data, {
+        style: f => {
+          const p = getPD(f.properties.Province);
+          return {
+            color: '#fff', weight: 0.8,
+            fillColor: p ? regionColor[p.region] || '#22c55e' : '#22c55e',
+            fillOpacity: 0.38
+          };
+        },
+        onEachFeature: (f, layer) => {
+          const p = getPD(f.properties.Province);
+          if (!p) return;
+          layer.bindTooltip(`
+            <div style="font-family:'Kanit',sans-serif;min-width:190px;line-height:1.6">
+              <strong style="font-size:14px;color:#14532d">${p.th}</strong>
+              <div style="font-size:11px;color:#6b7280">${f.properties.Province}</div>
+              <hr style="border:0;border-top:1px solid #e5e7eb;margin:6px 0">
+              <span style="font-size:12px">
+                📐 พื้นที่ <b>${p.area.toLocaleString()}</b> ตร.กม.<br>
+                👥 ประชากร <b>${p.pop.toLocaleString()}</b> คน<br>
+                🗺️ ภาค<b>${p.region}</b>
+              </span>
+            </div>`, { sticky: true, opacity: 1 });
+          layer.on({
+            mouseover: e => { e.target.setStyle({ fillOpacity: 0.75, weight: 2, color: '#14532d' }); e.target.bringToFront(); },
+            mouseout:  e => { geojsonLayer.resetStyle(e.target); }
+          });
+        }
+      }).addTo(map);
+    })
+    .catch(() => {
+      document.getElementById('thaiMap').insertAdjacentHTML('beforeend',
+        '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(240,253,244,.9);z-index:400;font-family:Kanit;color:#374151;text-align:center;border-radius:18px"><div>🌏 ข้อมูลขอบเขตจังหวัดโหลดไม่สำเร็จ<br><small style="color:#6b7280">ตลาดยังคงแสดงบนแผนที่</small></div></div>'
+      );
+    });
+
+  /* --- Market data --- */
+  const MARKETS = [
+    { id:1, name:"ตลาดไท", region:"กลาง", lat:14.064, lon:100.684, province:"ปทุมธานี",
+      type:"ค้าส่งผักผลไม้", area:"380 ไร่", time:"24 ชั่วโมง",
+      detail:"ตลาดค้าส่งสินค้าเกษตรที่ใหญ่ที่สุดในเอเชียตะวันออกเฉียงใต้ รองรับสินค้ากว่า 10,000 ตัน/วัน ผู้ค้ากว่า 3,000 ราย" },
+    { id:2, name:"ตลาดสี่มุมเมือง", region:"กลาง", lat:13.856, lon:100.530, province:"นนทบุรี",
+      type:"ค้าส่งผักผลไม้", area:"200 ไร่", time:"02:00–08:00 น.",
+      detail:"ตลาดค้าส่งขนาดใหญ่ฝั่งตะวันตกของกรุงเทพ รองรับพ่อค้าแม่ค้ารายย่อยทั่วปริมณฑล" },
+    { id:3, name:"ตลาดสินค้าเกษตรเชียงใหม่", region:"เหนือ", lat:18.788, lon:98.986, province:"เชียงใหม่",
+      type:"ค้าส่งผักผลไม้", area:"120 ไร่", time:"01:00–07:00 น.",
+      detail:"ศูนย์กระจายสินค้าเกษตรภาคเหนือ รวบรวมผักจากเชียงใหม่ เชียงราย ลำปาง และแม่ฮ่องสอน" },
+    { id:4, name:"ตลาดสินค้าเกษตรเชียงราย", region:"เหนือ", lat:19.907, lon:99.833, province:"เชียงราย",
+      type:"ค้าส่งผักผลไม้", area:"60 ไร่", time:"02:00–08:00 น.",
+      detail:"ตลาดกลางภาคเหนือตอนบน รับสินค้าเกษตรจากเชียงราย พะเยา น่าน และชายแดน" },
+    { id:5, name:"ตลาดสินค้าเกษตรพิษณุโลก", region:"เหนือ", lat:16.825, lon:100.264, province:"พิษณุโลก",
+      type:"ค้าส่งผักผลไม้", area:"55 ไร่", time:"02:00–08:00 น.",
+      detail:"ตลาดกลางภาคเหนือตอนล่าง รองรับสินค้าจากพิษณุโลก เพชรบูรณ์ พิจิตร สุโขทัย" },
+    { id:6, name:"ตลาดกลาง นครราชสีมา", region:"ตะวันออกเฉียงเหนือ", lat:14.979, lon:102.098, province:"นครราชสีมา",
+      type:"ค้าส่งผักผลไม้", area:"100 ไร่", time:"22:00–06:00 น.",
+      detail:"ศูนย์กระจายสินค้าเกษตรอีสานใต้ รองรับผักจากโคราช บุรีรัมย์ สุรินทร์ และชัยภูมิ" },
+    { id:7, name:"ตลาดกลาง ขอนแก่น", region:"ตะวันออกเฉียงเหนือ", lat:16.432, lon:102.834, province:"ขอนแก่น",
+      type:"ค้าส่งผักผลไม้", area:"90 ไร่", time:"01:00–07:00 น.",
+      detail:"ตลาดกลางอีสานกลาง ครอบคลุมขอนแก่น มหาสารคาม กาฬสินธุ์ และร้อยเอ็ด" },
+    { id:8, name:"ตลาดกลาง อุดรธานี", region:"ตะวันออกเฉียงเหนือ", lat:17.417, lon:102.788, province:"อุดรธานี",
+      type:"ค้าส่งผักผลไม้", area:"80 ไร่", time:"02:00–08:00 น.",
+      detail:"ศูนย์กระจายสินค้าเกษตรอีสานเหนือ ครอบคลุมอุดร หนองคาย เลย หนองบัวลำภู" },
+    { id:9, name:"ตลาดสินค้าเกษตร นครปฐม", region:"ตะวันตก", lat:13.819, lon:100.047, province:"นครปฐม",
+      type:"ค้าส่งผักผลไม้", area:"70 ไร่", time:"02:00–07:00 น.",
+      detail:"ตลาดกลางฝั่งตะวันตก รับสินค้าจากนครปฐม ราชบุรี สุพรรณบุรี และกาญจนบุรี" },
+    { id:10, name:"ตลาดกลาง ชลบุรี", region:"ตะวันออก", lat:13.366, lon:100.987, province:"ชลบุรี",
+      type:"ค้าส่ง-ปลีก", area:"50 ไร่", time:"04:00–10:00 น.",
+      detail:"ตลาดผักผลไม้ภาคตะวันออก รองรับพื้นที่ชลบุรี ระยอง จันทบุรี และตราด" },
+    { id:11, name:"ตลาดกลาง สุราษฎร์ธานี", region:"ใต้", lat:9.138, lon:99.327, province:"สุราษฎร์ธานี",
+      type:"ค้าส่งผักผลไม้", area:"60 ไร่", time:"02:00–08:00 น.",
+      detail:"ศูนย์กระจายสินค้าเกษตรภาคใต้ตอนบน ครอบคลุมสุราษฎร์ ชุมพร และนครศรีธรรมราช" },
+    { id:12, name:"ตลาดกลาง หาดใหญ่", region:"ใต้", lat:7.007, lon:100.477, province:"สงขลา",
+      type:"ค้าส่งผักผลไม้", area:"80 ไร่", time:"01:00–07:00 น.",
+      detail:"ตลาดผักผลไม้ใหญ่ที่สุดในภาคใต้ตอนล่าง รองรับสงขลา ปัตตานี ยะลา นราธิวาส" }
+  ];
+
+  const regionEmoji = { "เหนือ":"🏔️","กลาง":"🌾","ตะวันออก":"🌊","ตะวันออกเฉียงเหนือ":"🌻","ตะวันตก":"🌲","ใต้":"🌴" };
+
+  /* build market list */
+  const listEl = document.getElementById('marketList');
+  const markers = {};
+
+  MARKETS.forEach(m => {
+    /* Leaflet marker */
+    const icon = L.divIcon({
+      className: '',
+      html: `<div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#15803d);border:3px solid #fff;box-shadow:0 4px 12px rgba(21,128,61,.4);display:flex;align-items:center;justify-content:center;font-size:13px">🏪</div>`,
+      iconSize: [32,32], iconAnchor: [16,16]
+    });
+    const popup = `
+      <div style="font-family:'Kanit',sans-serif;min-width:240px;line-height:1.65">
+        <div style="font-size:15px;font-weight:700;color:#14532d">${m.name}</div>
+        <div style="font-size:12px;color:#16a34a;font-weight:600;margin:2px 0 8px">${regionEmoji[m.region]} ภาค${m.region} · ${m.province}</div>
+        <hr style="border:0;border-top:1px solid #e5e7eb;margin:0 0 8px">
+        <div style="font-size:12px;color:#374151">
+          🏪 <b>${m.type}</b><br>
+          📐 พื้นที่ <b>${m.area}</b><br>
+          ⏰ เวลาทำการ <b>${m.time}</b>
+        </div>
+        <div style="margin-top:8px;padding:8px 10px;background:#f0fdf4;border-radius:8px;font-size:11.5px;color:#374151;line-height:1.6">${m.detail}</div>
+      </div>`;
+    const mk = L.marker([m.lat, m.lon], { icon }).bindPopup(popup, { maxWidth: 280 }).addTo(map);
+    markers[m.id] = mk;
+
+    /* sidebar card */
+    const card = document.createElement('div');
+    card.className = 'market-item';
+    card.dataset.region = m.region;
+    card.id = `mcard-${m.id}`;
+    card.innerHTML = `
+      <div class="mi-icon">${regionEmoji[m.region]}</div>
+      <div class="mi-body">
+        <strong>${m.name}</strong>
+        <div class="mi-meta">
+          <span class="mi-region reg-${m.region}">${m.region}</span>${m.province} · ${m.time}
+        </div>
+      </div>`;
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.market-item').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      map.flyTo([m.lat, m.lon], 10, { duration: 0.9 });
+      setTimeout(() => mk.openPopup(), 900);
+    });
+    listEl.appendChild(card);
+  });
+
+  /* region filter */
+  document.querySelectorAll('.rtab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.rtab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const r = btn.dataset.region;
+      document.querySelectorAll('.market-item').forEach(c => {
+        c.classList.toggle('hidden', r !== 'all' && c.dataset.region !== r);
+      });
+      if (r !== 'all') {
+        const first = MARKETS.find(m => m.region === r);
+        if (first) map.flyTo([first.lat, first.lon], 8, { duration: 0.8 });
+      } else {
+        map.flyTo([13.0, 101.5], 6, { duration: 0.8 });
+      }
+    });
+  });
+})();
+
 // ===== Active nav link highlight =====
 const sections = document.querySelectorAll('section[id]');
 const linkMap = {};

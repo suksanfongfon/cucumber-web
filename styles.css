@@ -422,6 +422,89 @@ img { max-width: 100%; }
 .faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
 .faq-a p { padding: 0 22px 18px; color: var(--muted); font-size: .95rem; }
 
+/* ===== Markets Map ===== */
+.map-layout {
+  display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start;
+}
+.thai-map {
+  height: 580px; border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow); border: 1px solid var(--line); background: #e8f5ee;
+  z-index: 0; position: relative;
+}
+/* Leaflet overrides */
+.leaflet-container { font-family: 'Sarabun', sans-serif; }
+.leaflet-popup-content-wrapper { border-radius: 14px; box-shadow: var(--shadow); }
+.leaflet-tooltip {
+  border-radius: 10px; border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm); padding: 10px 14px;
+}
+
+.market-sidebar {
+  background: #fff; border-radius: var(--radius); border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm); overflow: hidden; max-height: 580px;
+  display: flex; flex-direction: column;
+}
+.market-sidebar-head {
+  padding: 18px 20px 14px; border-bottom: 1px solid var(--line);
+  background: linear-gradient(135deg, var(--green-900), var(--green-700));
+}
+.market-sidebar-head h3 { color: #fff; font-size: 1.05rem; }
+.market-sidebar-head p  { color: rgba(255,255,255,.75); font-size: .82rem; margin-top: 3px; }
+
+.market-region-tabs {
+  display: flex; gap: 6px; flex-wrap: wrap; padding: 12px 14px;
+  border-bottom: 1px solid var(--line); background: var(--green-50);
+}
+.rtab {
+  padding: 5px 12px; border-radius: 999px; border: 1.5px solid var(--line);
+  background: #fff; font-size: .75rem; font-family: 'Kanit'; font-weight: 500;
+  color: var(--muted); cursor: pointer; transition: all .18s ease;
+}
+.rtab:hover  { border-color: var(--green-400,#4ade80); color: var(--green-700); }
+.rtab.active { background: var(--green-600); color: #fff; border-color: var(--green-600); }
+
+.market-list {
+  overflow-y: auto; flex: 1; padding: 10px 12px;
+  scrollbar-width: thin; scrollbar-color: var(--green-300) transparent;
+}
+.market-item {
+  display: flex; gap: 12px; padding: 12px 10px; border-radius: 12px;
+  cursor: pointer; transition: background .18s ease; border: 1px solid transparent;
+  margin-bottom: 4px;
+}
+.market-item:hover { background: var(--green-50); border-color: var(--green-200,#bbf7d0); }
+.market-item.active { background: var(--green-100); border-color: var(--green-400,#4ade80); }
+.mi-icon {
+  flex: 0 0 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--green-500), var(--green-700));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; box-shadow: 0 4px 10px rgba(22,163,74,.3);
+}
+.mi-body { flex: 1; min-width: 0; }
+.mi-body strong { display: block; font-family: 'Kanit'; font-size: .95rem; color: var(--green-900); line-height: 1.2; }
+.mi-meta { font-size: .76rem; color: var(--muted); margin-top: 3px; }
+.mi-region {
+  display: inline-block; font-size: .68rem; padding: 2px 8px;
+  border-radius: 999px; font-weight: 600; font-family: 'Kanit'; margin-right: 4px;
+}
+.market-item.hidden { display: none; }
+
+.map-credit { text-align: center; font-size: .78rem; color: var(--muted); margin-top: 14px; }
+
+/* Region badge colors */
+.reg-เหนือ      { background: #dcfce7; color: #15803d; }
+.reg-กลาง       { background: #dbeafe; color: #1d4ed8; }
+.reg-ตะวันออก   { background: #ede9fe; color: #7c3aed; }
+.reg-ตะวันออกเฉียงเหนือ { background: #fef3c7; color: #b45309; }
+.reg-ตะวันตก    { background: #fce7f3; color: #be185d; }
+.reg-ใต้        { background: #fee2e2; color: #b91c1c; }
+
+@media (max-width: 960px) {
+  .map-layout { grid-template-columns: 1fr; }
+  .thai-map   { height: 400px; }
+  .market-sidebar { max-height: 400px; }
+}
+
 /* ===== CTA ===== */
 .cta { background: linear-gradient(135deg, var(--green-700), var(--green-500)); padding: 70px 0; text-align: center; }
 .cta-inner h2 { color: #fff; font-size: 2.1rem; margin-bottom: 12px; }

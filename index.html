@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥒</text></svg>" />
 </head>
@@ -29,6 +30,7 @@
         <a href="#nutrition">คุณค่าอาหาร</a>
         <a href="#diseases">โรคพืช</a>
         <a href="#recipes">เมนู</a>
+        <a href="#markets">ตลาดผัก</a>
         <a href="#faq">คำถามพบบ่อย</a>
       </nav>
     </div>
@@ -911,6 +913,39 @@
     </div>
   </section>
 
+  <!-- Markets Map -->
+  <section class="section section-alt" id="markets">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">ตลาดผักทั่วไทย</span>
+        <h2>แผนที่และตลาดสินค้าเกษตร</h2>
+        <p>ชี้ที่จังหวัดเพื่อดูพื้นที่และประชากร · คลิกหมุดสีเขียวเพื่อดูรายละเอียดตลาด</p>
+      </div>
+      <div class="map-layout">
+        <div id="thaiMap" class="thai-map"></div>
+        <aside class="market-sidebar">
+          <div class="market-sidebar-head">
+            <h3>ตลาดสินค้าเกษตรขนาดใหญ่</h3>
+            <p>ครอบคลุมทุกภาคทั่วประเทศ</p>
+          </div>
+          <div class="market-region-tabs" id="regionTabs">
+            <button class="rtab active" data-region="all">ทั้งหมด</button>
+            <button class="rtab" data-region="เหนือ">เหนือ</button>
+            <button class="rtab" data-region="กลาง">กลาง</button>
+            <button class="rtab" data-region="ตะวันออก">ตะวันออก</button>
+            <button class="rtab" data-region="ตะวันออกเฉียงเหนือ">อีสาน</button>
+            <button class="rtab" data-region="ตะวันตก">ตะวันตก</button>
+            <button class="rtab" data-region="ใต้">ใต้</button>
+          </div>
+          <div class="market-list" id="marketList">
+            <!-- filled by JS -->
+          </div>
+        </aside>
+      </div>
+      <p class="map-credit">ข้อมูลประชากรและพื้นที่โดยประมาณ ปี 2566 · แผนที่ © OpenStreetMap contributors</p>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta">
     <div class="container cta-inner">
@@ -937,6 +972,7 @@
         <a href="#nutrition">คุณค่าอาหาร</a>
         <a href="#diseases">โรคพืช</a>
         <a href="#recipes">เมนู</a>
+        <a href="#markets">ตลาดผัก</a>
         <a href="#faq">คำถามพบบ่อย</a>
       </nav>
     </div>
@@ -947,6 +983,7 @@
 
   <button class="to-top" id="toTop" aria-label="กลับขึ้นบน">↑</button>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
