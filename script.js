@@ -1,3 +1,87 @@
+// ===== Dynamic Greeting =====
+(function initGreeting() {
+  const h = new Date().getHours();
+  const greets = [
+    { s:5,  e:12, icon:"🌅", text:"สวัสดีตอนเช้า!",    sub:"วันนี้อากาศดี เหมาะปลูกแตงร้านมาก" },
+    { s:12, e:14, icon:"☀️", text:"สวัสดีตอนเที่ยง!", sub:"อย่าลืมรดน้ำแตงร้านช่วงเย็นด้วยนะครับ" },
+    { s:14, e:18, icon:"🌤️", text:"สวัสดีตอนบ่าย!",  sub:"ช่วงบ่ายเย็นเหมาะสำหรับเก็บเกี่ยว" },
+    { s:18, e:21, icon:"🌆", text:"สวัสดีตอนเย็น!",  sub:"เย็นนี้ลองทำเมนูแตงร้านสักจาน?" },
+    { s:21, e:24, icon:"🌙", text:"สวัสดีตอนค่ำ!",   sub:"ขอบคุณที่แวะมาเยี่ยมชมครับ" },
+    { s:0,  e:5,  icon:"🌙", text:"สวัสดียามดึก!",   sub:"ขอบคุณที่แวะมาครับ" },
+  ];
+  const g = greets.find(x => h >= x.s && h < x.e) || greets[0];
+  const el = document.getElementById('heroGreeting');
+  if (el) el.innerHTML = `${g.icon} <span>${g.text}</span> <small style="font-weight:400;opacity:.7;font-size:.9em">${g.sub}</small>`;
+})();
+
+// ===== Price Board =====
+(function initPrices() {
+  const grid = document.getElementById('priceGrid');
+  const dateEl = document.getElementById('priceDate');
+  if (!grid) return;
+
+  // show today's date in Thai
+  const today = new Date();
+  if (dateEl) {
+    dateEl.textContent = today.toLocaleDateString('th-TH', {
+      weekday:'long', day:'numeric', month:'long', year:'numeric'
+    });
+  }
+
+  // deterministic daily seed — prices change once a day, stable across refreshes
+  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+
+  function lcg(base, offset) {
+    return (((base * 1664525 + offset * 22695477) >>> 0) % 1000) / 1000;
+  }
+
+  const MARKETS = [
+    { name:"ตลาดไท",         loc:"ปทุมธานี",     icon:"🏪", bw:9.0, br:16.5, vw:4, vr:5 },
+    { name:"ตลาดสี่มุมเมือง", loc:"นนทบุรี",      icon:"🛒", bw:9.5, br:17.0, vw:3, vr:5 },
+    { name:"ตลาดศรีเมือง",   loc:"นครราชสีมา",   icon:"🌾", bw:7.5, br:14.0, vw:4, vr:5 },
+    { name:"ตลาดบางเขน",     loc:"กรุงเทพฯ",     icon:"🏙️", bw:10.0,br:18.0, vw:3, vr:4 },
+    { name:"ตลาดเชียงใหม่",  loc:"เชียงใหม่",    icon:"🏔️", bw:7.0, br:13.0, vw:4, vr:5 },
+    { name:"ตลาดหาดใหญ่",   loc:"สงขลา",        icon:"🌴", bw:8.0, br:15.0, vw:4, vr:5 },
+  ];
+
+  MARKETS.forEach((m, i) => {
+    const todayW = m.bw + lcg(seed,     i * 13) * m.vw;
+    const prevW  = m.bw + lcg(seed - 1, i * 13) * m.vw;
+    const todayR = m.br + lcg(seed,     i * 17) * m.vr;
+    const diff   = todayW - prevW;
+
+    const trendClass = diff > 0.3 ? 'up' : diff < -0.3 ? 'down' : 'stable';
+    const trendLabel = { up:'▲ ขึ้น', down:'▼ ลง', stable:'● คงที่' }[trendClass];
+    const diffStr  = trendClass === 'stable' ? '' : `${diff > 0 ? '+' : ''}${diff.toFixed(1)}`;
+    const diffCls  = diff > 0 ? 'diff-up' : diff < 0 ? 'diff-down' : 'diff-flat';
+
+    const card = document.createElement('div');
+    card.className = 'price-card';
+    card.innerHTML = `
+      <div class="pc-market">
+        <span class="pc-icon">${m.icon}</span>
+        <div><strong>${m.name}</strong><small>${m.loc}</small></div>
+      </div>
+      <hr class="pc-divider">
+      <div class="pc-prices">
+        <div class="pc-row">
+          <span class="pc-label">ราคาส่ง</span>
+          <span class="pc-trend trend-${trendClass}">${trendLabel}</span>
+        </div>
+        <div class="pc-row" style="align-items:baseline;gap:6px">
+          <span class="pc-val">${todayW.toFixed(1)}</span>
+          <span style="font-size:.72rem;color:rgba(255,255,255,.5)">฿/กก.</span>
+          ${diffStr ? `<span class="pc-diff ${diffCls}">(${diffStr})</span>` : ''}
+        </div>
+        <div class="pc-row" style="margin-top:4px">
+          <span class="pc-label">ราคาปลีก</span>
+          <span class="pc-val retail">${todayR.toFixed(1)} ฿</span>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+})();
+
 // ===== Navbar shadow on scroll =====
 const navbar = document.getElementById('navbar');
 const toTop = document.getElementById('toTop');
