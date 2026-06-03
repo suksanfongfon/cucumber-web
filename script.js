@@ -151,6 +151,115 @@ const io = new IntersectionObserver((entries) => {
 
 revealEls.forEach(el => io.observe(el));
 
+// ===== Seasonal Disease Alert =====
+(function initSeasonal() {
+  const monthEl  = document.getElementById('seasonMonth');
+  const cardsEl  = document.getElementById('seasonCards');
+  const bannerEl = document.getElementById('seasonBanner');
+  if (!cardsEl) return;
+
+  const m = new Date().getMonth(); // 0-11
+  const MONTH_TH = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน',
+                    'กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+  if (monthEl) monthEl.textContent = MONTH_TH[m];
+
+  /* --- สินค้า Lazada (ลิงก์ตรง — แปลงเป็น affiliate ผ่าน dashboard ก่อนใช้งาน) --- */
+  const P = {
+    mancozeb:      { name:'แมนโคเซบ 80% WP',            brand:'Mancozeb',         use:'ราน้ำค้าง · แอนแทรคโนส',              dose:'30–40 ก./น้ำ 20 ล. ทุก 7–10 วัน',      url:'https://www.lazada.co.th/products/80-mancozeb-80-wp-1-i2766570062.html' },
+    metalaxyl:     { name:'เมทาแลกซิล 35% DS',           brand:'Metalaxyl',        use:'ราน้ำค้าง · รากเน่า Pythium',           dose:'ราดโคนต้น หรือผสมดินก่อนปลูก',         url:'https://www.lazada.co.th/products/metalaxyl-35-ds-1-i865108802.html' },
+    carbendazim:   { name:'คาร์เบนดาซิม 50% SC',         brand:'Carbendazim',      use:'ราแป้ง · แอนแทรคโนส · โรคกิ่งแห้ง',    dose:'20–30 มล./น้ำ 20 ล. ทุก 7–14 วัน',     url:'https://www.lazada.co.th/products/carbendazim-50-sc-1-i317868844.html' },
+    imidacloprid:  { name:'อิมิดาโคลพริด 70% WG',         brand:'Imidacloprid',     use:'เพลี้ยอ่อน · แมลงหวี่ขาว (พาหะไวรัส)', dose:'5–10 ก./น้ำ 20 ล. ทุก 7 วัน',          url:'https://www.lazada.co.th/products/imidacloprid-70wg-100-i2568060900.html' },
+    copper:        { name:'ฟังกูราน คอปเปอร์ไฮดรอกไซด์', brand:'Copper Hydroxide', use:'โรคแบคทีเรีย · ใบจุดเหลี่ยม',           dose:'30–40 ก./น้ำ 20 ล. ทุก 7 วัน',          url:'https://www.lazada.co.th/products/1-copper-hydroxide-i727486994.html' },
+    chlorothalonil:{ name:'คลอโรทาโลนิล 75%',            brand:'Chlorothalonil',   use:'ราน้ำค้าง · ใบจุด · แอนแทรคโนส',       dose:'30–40 ก./น้ำ 20 ล. ทุก 7 วัน',          url:'https://www.lazada.co.th/products/75-1-i392172203.html' },
+  };
+
+  /* --- ตารางโรคประจำเดือน --- */
+  const SCHEDULE = [
+    /* ม.ค. */ [{ name:'ราแป้ง',          risk:'high',   icon:'🍞', reason:'อากาศเย็นแห้ง อุณหภูมิ 20–25°C เอื้อต่อราแป้งสูงสุด',          prods:['carbendazim'] },
+                { name:'ไวรัส CMV/ZYMV',  risk:'medium', icon:'🧬', reason:'เพลี้ยอ่อนเริ่มระบาดในช่วงอากาศแห้ง',                          prods:['imidacloprid'] }],
+    /* ก.พ. */ [{ name:'ราแป้ง',          risk:'high',   icon:'🍞', reason:'อากาศยังเย็นแห้ง ราแป้งระบาดต่อเนื่อง',                        prods:['carbendazim'] },
+                { name:'ไวรัส CMV',       risk:'medium', icon:'🧬', reason:'เพลี้ยอ่อนระบาดปานกลาง',                                        prods:['imidacloprid'] }],
+    /* มี.ค. */ [{ name:'ราแป้ง',         risk:'high',   icon:'🍞', reason:'อากาศร้อนแห้ง ราแป้งยังสูง',                                     prods:['carbendazim'] },
+                 { name:'ไวรัส CMV/ZYMV', risk:'high',   icon:'🧬', reason:'เพลี้ยอ่อนระบาดหนักสุดในฤดูแล้งร้อน ระวังไวรัสแพร่เร็ว',      prods:['imidacloprid'] }],
+    /* เม.ย. */ [{ name:'ไวรัส ToLCNDV',  risk:'high',   icon:'🧬', reason:'แมลงหวี่ขาว+เพลี้ยระบาดสูงสุด ไวรัสใบงอเหลืองแพร่เร็ว',       prods:['imidacloprid'] },
+                 { name:'ราแป้ง',         risk:'medium', icon:'🍞', reason:'อากาศยังร้อนชื้น ระวังราแป้งปลายฤดูแล้ง',                       prods:['carbendazim'] }],
+    /* พ.ค. */ [{ name:'ราน้ำค้าง',       risk:'high',   icon:'💧', reason:'ฝนเริ่มตก ความชื้น >75% ราน้ำค้างระบาดแรง',                    prods:['mancozeb','metalaxyl'] },
+                { name:'แอนแทรคโนส',     risk:'high',   icon:'🟤', reason:'ฝนพาสปอร์ไปติดใบและผล',                                         prods:['carbendazim','chlorothalonil'] }],
+    /* มิ.ย. */ [{ name:'ราน้ำค้าง',      risk:'high',   icon:'💧', reason:'ฤดูฝนเต็มที่ ความชื้น >80% ราน้ำค้างรุนแรงที่สุดในปี',         prods:['mancozeb','metalaxyl'] },
+                 { name:'แอนแทรคโนส',    risk:'high',   icon:'🟤', reason:'ฝนชุก สปอร์กระจายทั่วแปลง ระวังทั้งใบและผล',                   prods:['carbendazim','chlorothalonil'] },
+                 { name:'รากเน่า Pythium',risk:'high',   icon:'🌱', reason:'น้ำขัง ดินชื้นจัด Pythium ระบาดรุนแรง',                          prods:['metalaxyl'] },
+                 { name:'ใบจุดเหลี่ยม',  risk:'medium', icon:'🦠', reason:'ฝนตกสาดน้ำพาแบคทีเรียติดใบ',                                    prods:['copper'] }],
+    /* ก.ค. */ [{ name:'ราน้ำค้าง',       risk:'high',   icon:'💧', reason:'ฝนหนักต่อเนื่อง ความชื้นสูงสุด',                                prods:['mancozeb','metalaxyl'] },
+                { name:'แอนแทรคโนส',     risk:'high',   icon:'🟤', reason:'ฝนตลอด สปอร์ระบาดหนักมาก',                                      prods:['carbendazim'] },
+                { name:'รากเน่า',         risk:'high',   icon:'🌱', reason:'ดินแฉะ น้ำขังนาน',                                              prods:['metalaxyl'] }],
+    /* ส.ค. */ [{ name:'ราน้ำค้าง',       risk:'high',   icon:'💧', reason:'ฝนยังชุก ความชื้นสูง',                                           prods:['mancozeb'] },
+                { name:'แอนแทรคโนส',     risk:'high',   icon:'🟤', reason:'กลางฤดูฝน สปอร์ระบาด',                                           prods:['carbendazim','chlorothalonil'] },
+                { name:'รากเน่า',         risk:'high',   icon:'🌱', reason:'ดินชื้นสูง',                                                     prods:['metalaxyl'] }],
+    /* ก.ย. */ [{ name:'ราน้ำค้าง',       risk:'high',   icon:'💧', reason:'ฤดูฝนยังต่อเนื่อง',                                              prods:['mancozeb','metalaxyl'] },
+                { name:'รากเน่า',         risk:'medium', icon:'🌱', reason:'ดินยังชื้น เริ่มลดลง',                                           prods:['metalaxyl'] },
+                { name:'ใบจุดเหลี่ยม',   risk:'medium', icon:'🦠', reason:'แบคทีเรียช่วงปลายฝน',                                           prods:['copper'] }],
+    /* ต.ค. */ [{ name:'รากเน่า Pythium', risk:'high',   icon:'🌱', reason:'ฝนหนักสะสม ดินชื้นมาก',                                          prods:['metalaxyl'] },
+                { name:'ราน้ำค้าง',      risk:'medium', icon:'💧', reason:'ความชื้นยังสูงปลายฤดูฝน',                                        prods:['mancozeb'] },
+                { name:'ใบจุดเหลี่ยม',  risk:'medium', icon:'🦠', reason:'แบคทีเรียช่วงน้ำชื้น',                                           prods:['copper'] }],
+    /* พ.ย. */ [{ name:'รากเน่า',         risk:'medium', icon:'🌱', reason:'ดินยังชื้นจากฝนก่อน',                                            prods:['metalaxyl'] },
+                { name:'ราแป้ง',          risk:'medium', icon:'🍞', reason:'อากาศเริ่มเย็น ราแป้งเริ่มระบาด',                               prods:['carbendazim'] },
+                { name:'ไวรัส CMV',       risk:'low',    icon:'🧬', reason:'เพลี้ยอ่อนเริ่มกลับมา แต่ยังน้อย',                              prods:['imidacloprid'] }],
+    /* ธ.ค. */ [{ name:'ราแป้ง',          risk:'high',   icon:'🍞', reason:'อากาศเย็นแห้ง เหมาะสำหรับราแป้งสูงสุด',                        prods:['carbendazim'] },
+                { name:'ไวรัส CMV',       risk:'medium', icon:'🧬', reason:'เพลี้ยอ่อนเริ่มระบาดอีกครั้งในฤดูหนาว',                        prods:['imidacloprid'] }],
+  ];
+
+  const SEASONS = [
+    { months:[11,0,1], label:'ฤดูหนาว', icon:'❄️', bg:'#dbeafe', color:'#1e40af' },
+    { months:[2,3,4],  label:'ฤดูร้อน', icon:'☀️', bg:'#ffedd5', color:'#c2410c' },
+    { months:[5,6,7,8,9,10], label:'ฤดูฝน', icon:'🌧️', bg:'#dcfce7', color:'#15803d' },
+  ];
+  const season = SEASONS.find(s => s.months.includes(m)) || SEASONS[2];
+  const diseases = SCHEDULE[m] || [];
+  const highCount = diseases.filter(d => d.risk === 'high').length;
+
+  if (bannerEl) {
+    bannerEl.innerHTML = `
+      <div class="season-tag" style="background:${season.bg};color:${season.color}">
+        <span style="font-size:1.2rem">${season.icon} ${season.label} · ${MONTH_TH[m]}</span>
+        <span>พบ <b>${highCount} โรค</b> ความเสี่ยงสูงในช่วงนี้</span>
+      </div>`;
+  }
+
+  const RISK_LABEL = { high:'🔴 ความเสี่ยงสูง', medium:'🟡 ปานกลาง', low:'🟢 ต่ำ' };
+  const RISK_CLASS = { high:'risk-high', medium:'risk-med', low:'risk-low' };
+
+  diseases.forEach(d => {
+    const prodsHTML = d.prods.map(pid => {
+      const pr = P[pid]; if (!pr) return '';
+      return `
+        <div class="prod-item">
+          <div class="prod-info">
+            <strong>${pr.name}</strong>
+            <span class="prod-brand">${pr.brand}</span>
+            <span class="prod-use">ใช้สำหรับ: ${pr.use}</span>
+            <span class="prod-dose">📋 ${pr.dose}</span>
+          </div>
+          <a href="${pr.url}" target="_blank" rel="noopener sponsored" class="lazada-btn">
+            🛒 ซื้อบน Lazada
+          </a>
+        </div>`;
+    }).join('');
+
+    const card = document.createElement('div');
+    card.className = `season-card ${RISK_CLASS[d.risk]}`;
+    card.innerHTML = `
+      <div class="sc-head">
+        <div>
+          <h3>${d.icon} ${d.name}</h3>
+          <span class="risk-badge ${RISK_CLASS[d.risk]}">${RISK_LABEL[d.risk]}</span>
+        </div>
+      </div>
+      <p class="sc-reason">⚡ ${d.reason}</p>
+      <div class="sc-products">${prodsHTML}</div>`;
+    cardsEl.appendChild(card);
+  });
+})();
+
 // ===== Problem filter tabs =====
 document.querySelectorAll('.ptab').forEach(tab => {
   tab.addEventListener('click', () => {
