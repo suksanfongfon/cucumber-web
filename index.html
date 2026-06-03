@@ -27,11 +27,12 @@
         <a href="#about">รู้จักแตงร้าน</a>
         <a href="#varieties">สายพันธุ์</a>
         <a href="#grow">วิธีปลูก</a>
+        <a href="#problems">ปัญหาที่พบ</a>
         <a href="#nutrition">คุณค่าอาหาร</a>
         <a href="#diseases">โรคพืช</a>
         <a href="#recipes">เมนู</a>
         <a href="#markets">ตลาดผัก</a>
-        <a href="#faq">คำถามพบบ่อย</a>
+        <a href="#faq">FAQ</a>
       </nav>
     </div>
   </header>
@@ -224,6 +225,302 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Problems -->
+  <section class="section section-alt" id="problems">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">ปัญหาที่พบบ่อย</span>
+        <h2>แก้ปัญหาแตงร้าน</h2>
+        <p>อาการที่เกิดขึ้น สาเหตุ และวิธีแก้ไขสำหรับปัญหาที่ชาวสวนพบบ่อยที่สุด</p>
+      </div>
+
+      <!-- Filter -->
+      <div class="prob-tabs" id="probTabs">
+        <button class="ptab active" data-cat="all">ทั้งหมด</button>
+        <button class="ptab" data-cat="physio">🌸 สรีรวิทยา</button>
+        <button class="ptab" data-cat="nutrition">🌿 โภชนาการ</button>
+        <button class="ptab" data-cat="manage">🔧 การจัดการ</button>
+        <button class="ptab" data-cat="env">🌡️ สภาพแวดล้อม</button>
+      </div>
+
+      <div class="prob-grid" id="probGrid">
+
+        <!-- 1 ดอกตัวผู้มาก -->
+        <article class="pcard" data-cat="physio">
+          <div class="pcard-top">
+            <div class="prob-icon">🌸</div>
+            <div>
+              <h3>ดอกตัวผู้มากเกินไป</h3>
+              <span class="pcat physio">สรีรวิทยา</span>
+            </div>
+          </div>
+          <div class="pcard-symptom">
+            <strong>อาการ:</strong> ดอกสีเหลืองบานมาก แต่ไม่ค่อยติดผล ดอกร่วงก่อนผสม
+          </div>
+          <div class="pcard-body">
+            <div class="pcol cause">
+              <h4>⚡ สาเหตุ</h4>
+              <ul>
+                <li>วันยาวเกิน 13–14 ชั่วโมง กระตุ้นการออกดอกตัวผู้</li>
+                <li>อุณหภูมิกลางคืนสูง (>25°C)</li>
+                <li>ปุ๋ยไนโตรเจนมากเกินไป</li>
+                <li>ความชื้นต่ำ</li>
+              </ul>
+            </div>
+            <div class="pcol fix">
+              <h4>✅ วิธีแก้</h4>
+              <ul>
+                <li>ปลูกช่วงวันสั้น (พ.ย.–ก.พ.) หรือบังแสงให้น้อยกว่า 12 ชม./วัน</li>
+                <li>ฉีดพ่นสาร Ethephon 100–200 ppm กระตุ้นดอกตัวเมีย</li>
+                <li>ลดปุ๋ยไนโตรเจน เพิ่มฟอสฟอรัส-โพแทสเซียม</li>
+                <li>เลือกพันธุ์ parthenocarpic ที่ไม่ต้องผสมเกสร</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2 ผลงอ -->
+        <article class="pcard" data-cat="manage">
+          <div class="pcard-top">
+            <div class="prob-icon">🥒</div>
+            <div>
+              <h3>ผลงอ / เสียรูป</h3>
+              <span class="pcat manage">การจัดการ</span>
+            </div>
+          </div>
+          <div class="pcard-symptom">
+            <strong>อาการ:</strong> ผลโค้งงอ บิดเบี้ยว ไม่ตรง ปลายผลเล็กหรือแห้ง
+          </div>
+          <div class="pcard-body">
+            <div class="pcol cause">
+              <h4>⚡ สาเหตุ</h4>
+              <ul>
+                <li>การผสมเกสรไม่สม่ำเสมอ เกสรตกไม่ทั่ว</li>
+                <li>ขาดน้ำช่วงผลกำลังโต</li>
+                <li>ขาดแคลเซียม-โบรอน</li>
+                <li>ผลแน่นค้างหรือถูกขัดขวาง</li>
+              </ul>
+            </div>
+            <div class="pcol fix">
+              <h4>✅ วิธีแก้</h4>
+              <ul>
+                <li>ทำค้างให้เถาเลื้อยขึ้น ผลห้อยลงตรงตามแรงโน้มถ่วง</li>
+                <li>รดน้ำสม่ำเสมอ ไม่ให้ขาดช่วงผลโต</li>
+                <li>ฉีดพ่นแคลเซียมไนเตรต 0.5% + โบรอน</li>
+                <li>ส่งเสริมแมลงผสมเกสร ไม่ใช้ยาฆ่าแมลงช่วงดอกบาน</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3 ผลขม -->
+        <article class="pcard" data-cat="physio">
+          <div class="pcard-top">
+            <div class="prob-icon">😖</div>
+            <div>
+              <h3>ผลมีรสขม</h3>
+              <span class="pcat physio">สรีรวิทยา</span>
+            </div>
+          </div>
+          <div class="pcard-symptom">
+            <strong>อาการ:</strong> ผลกินแล้วขมผิดปกติ โดยเฉพาะส่วนขั้วและเปลือก
+          </div>
+          <div class="pcard-body">
+            <div class="pcol cause">
+              <h4>⚡ สาเหตุ</h4>
+              <ul>
+                <li>ต้นเครียดจากขาดน้ำ สาร <em>cucurbitacin</em> เพิ่มขึ้น</li>
+                <li>อุณหภูมิสูงมากหรือกระทันหัน</li>
+                <li>ดินขาดความสม่ำเสมอของน้ำ-ปุ๋ย</li>
+                <li>บางสายพันธุ์มีแนวโน้มขมตามพันธุกรรม</li>
+              </ul>
+            </div>
+            <div class="pcol fix">
+              <h4>✅ วิธีแก้</h4>
+              <ul>
+                <li>รดน้ำสม่ำเสมอ อย่าให้ดินแห้งสลับชื้น</li>
+                <li>คลุมดินด้วยฟางหรือพลาสติกดำลดความผันผวน</li>
+                <li>เก็บผลในขนาดที่พอดี ไม่ปล่อยค้างแก่บนต้น</li>
+                <li>เลือกพันธุ์ที่คัดลักษณะความขมออก เช่น พันธุ์ F1 สมัยใหม่</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4 ผลร่วง -->
+        <article class="pcard" data-cat="manage">
+          <div class="pcard-top">
+            <div class="prob-icon">🍂</div>
+            <div>
+              <h3>ผลอ่อนร่วงก่อนแก่</h3>
+              <span class="pcat manage">การจัดการ</span>
+            </div>
+          </div>
+          <div class="pcard-symptom">
+            <strong>อาการ:</strong> ผลอ่อนขนาดเล็กร่วงหลุดจากต้น ขั้วผลดำ
+          </div>
+          <div class="pcard-body">
+            <div class="pcol cause">
+              <h4>⚡ สาเหตุ</h4>
+              <ul>
+                <li>ขาดน้ำกะทันหันช่วงติดผล</li>
+                <li>ขาดโบรอนทำให้ขั้วผลอ่อนแอ</li>
+                <li>ผสมเกสรไม่สำเร็จ ต้นทิ้งผล</li>
+                <li>แบกผลมากเกินไป ต้นจัดลำดับความสำคัญ</li>
+              </ul>
+            </div>
+            <div class="pcol fix">
+              <h4>✅ วิธีแก้</h4>
+              <ul>
+                <li>รดน้ำสม่ำเสมอ โดยเฉพาะช่วง 2 สัปดาห์แรกหลังดอกบาน</li>
+                <li>ฉีดพ่นโบรอน 0.1% ทุก 10–14 วัน</li>
+                <li>ตัดผลที่ติดมากเกินไปออก เหลือในระยะที่เหมาะสม</li>
+                <li>เสริมธาตุอาหาร P-K และแคลเซียม</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5 ใบเหลือง -->
+        <article class="pcard" data-cat="nutrition">
+          <div class="pcard-top">
+            <div class="prob-icon">🟡</div>
+            <div>
+              <h3>ใบเหลืองซีด</h3>
+              <span class="pcat nutrition">โภชนาการ</span>
+            </div>
+          </div>
+          <div class="pcard-symptom">
+            <strong>อาการ:</strong> ใบเปลี่ยนเป็นสีเหลืองซีด อาจเริ่มจากใบล่างหรือใบบน แล้วแต่ธาตุที่ขาด
+          </div>
+          <div class="pcard-body">
+            <div class="pcol cause">
+              <h4>⚡ สาเหตุ</h4>
+              <ul>
+                <li>ขาดไนโตรเจน (N) — เหลืองทั้งต้น เริ่มใบล่าง</li>
+                <li>ขาดเหล็ก (Fe) — เหลืองระหว่างเส้นใบ เริ่มใบอ่อน</li>
+                <li>ขาดแมกนีเซียม (Mg) — เหลืองระหว่างเส้นใบ เริ่มใบแก่</li>
+                <li>ดิน pH ต่ำ/สูงเกินทำให้ดูดธาตุไม่ได้</li>
+              </ul>
+            </div>
+            <div class="pcol fix">
+              <h4>✅ วิธีแก้</h4>
+              <ul>
+                <li>ตรวจ pH ดิน ปรับให้ 5.8–6.8 ก่อนใส่ปุ๋ย</li>
+                <li>ใส่ปุ๋ยยูเรียหรือแอมโมเนียมซัลเฟตถ้าขาด N</li>
+                <li>ฉีดพ่นเหล็กคีเลต (Fe-EDTA) ถ้าขาด Fe</li>
+                <li>ฉีดพ่น MgSO₄ 0.5% ถ้าขาด Mg</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6 ผลเล็กไม่โต -->
+        <article class="pcard" data-cat="nutrition">
+          <div class="pcard-top">
+            <div class="prob-icon">🔬</div>
+            <div>
+              <h3>ผลเล็ก ไม่โตเต็มที่</h3>
+              <span class="pcat nutrition">โภชนาการ</span>
+            </div>
+          </div>
+          <div class="pcard-symptom">
+            <strong>อาการ:</strong> ผลไม่โตตามขนาดพันธุ์ เนื้อบาง เมล็ดน้อย ผิวเหี่ยว
+          </div>
+          <div class="pcard-body">
+            <div class="pcol cause">
+              <h4>⚡ สาเหตุ</h4>
+              <ul>
+                <li>ติดผลพร้อมกันมากเกินไป แย่งอาหารกัน</li>
+                <li>ขาดโพแทสเซียม (K) ที่จำเป็นต่อการพัฒนาผล</li>
+                <li>ขาดน้ำหรือรากถูกทำลาย</li>
+                <li>ต้นแก่/เครียดหลังให้ผลนาน</li>
+              </ul>
+            </div>
+            <div class="pcol fix">
+              <h4>✅ วิธีแก้</h4>
+              <ul>
+                <li>ตัดผลส่วนเกินออก เหลือในระยะที่เหมาะสมต่อต้น</li>
+                <li>ใส่ปุ๋ย K สูง เช่น 0-0-60 หรือโพแทสเซียมซัลเฟต</li>
+                <li>รดน้ำสม่ำเสมอ ปริมาณพอเหมาะ</li>
+                <li>หมั่นตัดใบแก่/ใบล่างออกเพื่อลดการแข่งขัน</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7 ต้นแคระ -->
+        <article class="pcard" data-cat="env">
+          <div class="pcard-top">
+            <div class="prob-icon">🌱</div>
+            <div>
+              <h3>ต้นโตช้า / แคระแกร็น</h3>
+              <span class="pcat env">สภาพแวดล้อม</span>
+            </div>
+          </div>
+          <div class="pcard-symptom">
+            <strong>อาการ:</strong> ต้นไม่โตตามอายุ ปล้องสั้น ใบเล็กหนา ดูแข็งทื่อ
+          </div>
+          <div class="pcard-body">
+            <div class="pcol cause">
+              <h4>⚡ สาเหตุ</h4>
+              <ul>
+                <li>อุณหภูมิต่ำกว่า 15°C ชะลอการเจริญเติบโต</li>
+                <li>ดินแน่น ระบายน้ำไม่ดี รากขยายตัวไม่ได้</li>
+                <li>รากปม (Meloidogyne) ทำลายระบบราก</li>
+                <li>pH ดินต่ำมากหรือดินเค็ม</li>
+              </ul>
+            </div>
+            <div class="pcol fix">
+              <h4>✅ วิธีแก้</h4>
+              <ul>
+                <li>ปลูกในช่วงอุณหภูมิ 25–32°C</li>
+                <li>พรวนดินลึก 30 ซม. ผสมปุ๋ยหมักให้ร่วนซุย</li>
+                <li>ตรวจรากหากสงสัยรากปม — ใช้ Paecilomyces ควบคุม</li>
+                <li>ตรวจ pH ปรับด้วยปูนขาวหากดินเป็นกรด</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8 โคนเน่า -->
+        <article class="pcard" data-cat="env">
+          <div class="pcard-top">
+            <div class="prob-icon">⚠️</div>
+            <div>
+              <h3>เถาเน่า / โคนต้นเน่า</h3>
+              <span class="pcat env">สภาพแวดล้อม</span>
+            </div>
+          </div>
+          <div class="pcard-symptom">
+            <strong>อาการ:</strong> ลำต้นส่วนโคนเน่าดำ ต้นเหี่ยวทันที แม้ดินยังมีความชื้น
+          </div>
+          <div class="pcard-body">
+            <div class="pcol cause">
+              <h4>⚡ สาเหตุ</h4>
+              <ul>
+                <li>น้ำขังที่โคนต้นนานเกินไป</li>
+                <li>เชื้อ Pythium หรือ Phytophthora ในดิน</li>
+                <li>รดน้ำมากเกินไปในช่วงต้นกล้า</li>
+                <li>อากาศชื้นสูงร่วมกับอุณหภูมิสูง</li>
+              </ul>
+            </div>
+            <div class="pcol fix">
+              <h4>✅ วิธีแก้</h4>
+              <ul>
+                <li>ยกแปลงปลูกให้สูง ระบายน้ำให้ออกได้ดี</li>
+                <li>อย่าให้น้ำขังที่โคนต้น เปลี่ยนเป็นระบบน้ำหยด</li>
+                <li>ราดเมทาแลกซิลหรือฟอสโฟนิคแอซิดรอบโคน</li>
+                <li>ใช้ Trichoderma ผสมดินก่อนปลูกเพื่อป้องกัน</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+      </div><!-- /.prob-grid -->
     </div>
   </section>
 
@@ -985,11 +1282,12 @@
         <a href="#about">รู้จักแตงร้าน</a>
         <a href="#varieties">สายพันธุ์</a>
         <a href="#grow">วิธีปลูก</a>
+        <a href="#problems">ปัญหาที่พบ</a>
         <a href="#nutrition">คุณค่าอาหาร</a>
         <a href="#diseases">โรคพืช</a>
         <a href="#recipes">เมนู</a>
         <a href="#markets">ตลาดผัก</a>
-        <a href="#faq">คำถามพบบ่อย</a>
+        <a href="#faq">FAQ</a>
       </nav>
     </div>
     <div class="foot-bottom">

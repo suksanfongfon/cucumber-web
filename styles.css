@@ -268,6 +268,79 @@ img { max-width: 100%; }
 .step-body h3 { font-size: 1.12rem; color: var(--green-900); margin-bottom: 6px; }
 .step-body p { font-size: .92rem; color: var(--muted); }
 
+/* ===== Problems ===== */
+.prob-tabs {
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+  padding: 6px; background: #fff; border-radius: 999px;
+  width: fit-content; margin: 0 auto 44px; box-shadow: var(--shadow-sm);
+}
+.ptab {
+  padding: 9px 18px; border-radius: 999px; border: none;
+  background: transparent; font-family: 'Kanit'; font-size: .88rem;
+  font-weight: 500; color: var(--muted); cursor: pointer; transition: all .2s ease;
+  white-space: nowrap;
+}
+.ptab:hover { background: var(--green-50); color: var(--green-700); }
+.ptab.active { background: #f97316; color: #fff; box-shadow: 0 4px 14px rgba(249,115,22,.35); }
+
+.prob-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+}
+.pcard {
+  background: #fff; border-radius: 18px; overflow: hidden;
+  border: 1px solid #fed7aa; box-shadow: 0 2px 14px rgba(249,115,22,.08);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.pcard:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(249,115,22,.15); }
+.pcard.hidden { display: none; }
+
+.pcard-top {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 20px 14px; border-bottom: 1px solid #fff7ed;
+  background: linear-gradient(135deg, #fff7ed, #ffedd5);
+}
+.prob-icon { font-size: 2.2rem; line-height: 1; flex: 0 0 auto; }
+.pcard-top h3 { font-size: 1.1rem; color: #7c2d12; margin-bottom: 5px; }
+
+.pcat {
+  display: inline-block; font-size: .72rem; font-weight: 600;
+  font-family: 'Kanit'; padding: 3px 10px; border-radius: 999px;
+}
+.pcat.physio    { background: #fef3c7; color: #92400e; }
+.pcat.nutrition { background: #dcfce7; color: #14532d; }
+.pcat.manage    { background: #dbeafe; color: #1e40af; }
+.pcat.env       { background: #f0fdf4; color: #065f46; }
+
+.pcard-symptom {
+  padding: 12px 20px; background: #fffbeb;
+  font-size: .88rem; color: #78350f; border-bottom: 1px solid #fed7aa;
+  line-height: 1.6;
+}
+
+.pcard-body {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+}
+.pcol { padding: 16px 18px; }
+.pcol.cause { border-right: 1px solid #ffedd5; }
+.pcol h4 {
+  font-family: 'Kanit'; font-size: .82rem; font-weight: 600;
+  margin-bottom: 10px; color: #374151;
+}
+.pcol ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.pcol li {
+  font-size: .84rem; color: #4b5563; line-height: 1.55;
+  padding-left: 16px; position: relative;
+}
+.pcol.cause li::before { content: '•'; position: absolute; left: 0; color: #f97316; font-weight: 700; }
+.pcol.fix   li::before { content: '✓'; position: absolute; left: 0; color: #16a34a; font-weight: 700; }
+
+@media (max-width: 960px) { .prob-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) {
+  .pcard-body { grid-template-columns: 1fr; }
+  .pcol.cause { border-right: none; border-bottom: 1px solid #ffedd5; }
+  .prob-tabs  { border-radius: 16px; }
+}
+
 /* ===== Nutrition ===== */
 .nutri-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 40px; align-items: start; }
 .nutri-table-wrap { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow-sm); }

@@ -151,6 +151,18 @@ const io = new IntersectionObserver((entries) => {
 
 revealEls.forEach(el => io.observe(el));
 
+// ===== Problem filter tabs =====
+document.querySelectorAll('.ptab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const cat = tab.dataset.cat;
+    document.querySelectorAll('.pcard').forEach(c => {
+      c.classList.toggle('hidden', cat !== 'all' && c.dataset.cat !== cat);
+    });
+  });
+});
+
 // ===== Disease filter tabs =====
 const tabs = document.querySelectorAll('.dtab');
 const dcards = document.querySelectorAll('.dcard');
